@@ -6,6 +6,65 @@ import re
 from pypdf import PdfReader
 
 
+def daten_laden(dateiname):
+    try:
+        with open(dateiname, "r", encoding="utf-8") as datei:
+            einkaeufe = json.load(datei)
+    except FileNotFoundError:
+        print("Noch keine Datei vorhanden.")
+        return []
+    except json.JSONDecodeError:
+        print("Datei ist fehlerhaft.")
+        return []
+    for artikel in einkaeufe:
+        if not isinstance(artikel, dict):
+            continue
+        if 'produkt' not in artikel or str(artikel['produkt']).strip() == '':
+            artikel['produkt'] = 'unbekannt'
+
+        if 'kategorie' not in artikel or str(artikel['kategorie']).strip() == '':
+            artikel['kategorie'] = 'unbekannt'
+
+        if 'einheit' not in artikel or str(artikel['einheit']).strip() == '':
+            artikel['einheit'] = 'unbekannt'
+
+        if 'bio' not in artikel or artikel['bio'] not in ['ja', 'nein']:
+            artikel['bio'] = 'unbekannt'
+
+        if 'menge' not in artikel or artikel['menge'] is None or artikel['menge'] == '':
+            artikel['menge'] = None
+
+        if 'einzelpreis' not in artikel or artikel['einzelpreis'] is None or artikel['einzelpreis'] == '':
+            artikel['einzelpreis'] = None
+
+        if 'haendler' not in artikel or str(artikel['haendler']).strip() == '':
+            artikel['haendler'] = 'unbekannt'
+
+        if 'datum' not in artikel or artikel['datum'] is None or artikel['datum'] == '':
+            artikel['datum'] = None
+        else:
+            datum_string = artikel['datum']
+            try:
+                datum_objekt = datetime.strptime(datum_string, "%Y-%m-%d")
+            except ValueError:
+                try:
+                    datum_objekt = datetime.strptime(datum_string, "%d.%m.%Y")
+                except ValueError:
+                    datum_objekt = None
+            if datum_objekt:
+                artikel['datum'] = datum_objekt.strftime("%Y-%m-%d")
+                artikel['kalenderwoche'] = datum_objekt.isocalendar().week
+                artikel['monat'] = datum_objekt.month
+        
+        vollstaendigkeit_pruefen(artikel)
+    return einkaeufe
+
+
+def daten_speichern(dateiname, einkaeufe):
+    with open(dateiname, "w", encoding="utf-8") as datei:
+        json.dump(einkaeufe, datei, ensure_ascii=False, indent=4)
+
+
 def stammdaten_laden(dateiname):
     try:
         with open(dateiname, "r", encoding="utf-8") as datei:
@@ -19,9 +78,38 @@ def stammdaten_laden(dateiname):
         return {}
 
 
+def stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, dateiname):
+    stammdaten["KATEGORIE_ZUORDNUNG"] = kategorie_zuordnung
+    stammdaten_speichern(stammdaten_datei, stammdaten)
+
+
 def stammdaten_speichern(dateiname, stammdaten):
     with open(dateiname, "w", encoding="utf-8") as datei:
         json.dump(stammdaten, datei, ensure_ascii=False, indent=4)
+
+
+def produkt_mapping_laden(dateiname):
+    try:
+        with open(dateiname, "r", encoding="utf-8") as datei:
+            mapping = json.load(datei)
+            return mapping
+    except FileNotFoundError:
+        print("Produkt-Mapping-Datei nicht gefunden.")
+        return {}
+    except json.JSONDecodeError:
+        print("Produkt-Mapping-Datei ist fehlerhaft.")
+        return {}
+
+
+def produkt_standard_bestimmen(produkt, mapping):
+    if produkt in mapping:
+        return mapping[produkt]
+    return produkt
+
+
+def produkt_mapping_speichern(dateiname, mapping):
+    with open(dateiname, "w", encoding="utf-8") as datei:
+        json.dump(mapping, datei, ensure_ascii=False, indent=4)
 
 
 def pdf_text_auslesen(dateiname):
@@ -122,7 +210,7 @@ def rewe_text_zu_artikeln(text):
         
         kategorie = kategorie_vorschlagen(produkt, kategorie_zuordnung)
         
-        artikel = {"produkt": produkt, "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
+        artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
         artikel_liste.append(artikel)
         letzter_artikel = artikel
     return artikel_liste
@@ -159,11 +247,6 @@ def kategorie_zuordnung_lernen(produkt, kategorie, kategorie_zuordnung):
             else:
                 print("Bitte ja oder nein eingeben. ")
     return kategorie_zuordnung
-
-
-def stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, dateiname):
-    stammdaten["KATEGORIE_ZUORDNUNG"] = kategorie_zuordnung
-    stammdaten_speichern(stammdaten_datei, stammdaten)
 
 
 def rewe_datum_aus_text(text):
@@ -210,69 +293,10 @@ def rewe_pdf_import(dateiname):
     return artikel_liste
 
 
-def daten_laden(dateiname):
-    try:
-        with open(dateiname, "r", encoding="utf-8") as datei:
-            einkaeufe = json.load(datei)
-    except FileNotFoundError:
-        print("Noch keine Datei vorhanden.")
-        return []
-    except json.JSONDecodeError:
-        print("Datei ist fehlerhaft.")
-        return []
-    for artikel in einkaeufe:
-        if not isinstance(artikel, dict):
-            continue
-        if 'produkt' not in artikel or str(artikel['produkt']).strip() == '':
-            artikel['produkt'] = 'unbekannt'
-
-        if 'kategorie' not in artikel or str(artikel['kategorie']).strip() == '':
-            artikel['kategorie'] = 'unbekannt'
-
-        if 'einheit' not in artikel or str(artikel['einheit']).strip() == '':
-            artikel['einheit'] = 'unbekannt'
-
-        if 'bio' not in artikel or artikel['bio'] not in ['ja', 'nein']:
-            artikel['bio'] = 'unbekannt'
-
-        if 'menge' not in artikel or artikel['menge'] is None or artikel['menge'] == '':
-            artikel['menge'] = None
-
-        if 'einzelpreis' not in artikel or artikel['einzelpreis'] is None or artikel['einzelpreis'] == '':
-            artikel['einzelpreis'] = None
-
-        if 'haendler' not in artikel or str(artikel['haendler']).strip() == '':
-            artikel['haendler'] = 'unbekannt'
-
-        if 'datum' not in artikel or artikel['datum'] is None or artikel['datum'] == '':
-            artikel['datum'] = None
-        else:
-            datum_string = artikel['datum']
-            try:
-                datum_objekt = datetime.strptime(datum_string, "%Y-%m-%d")
-            except ValueError:
-                try:
-                    datum_objekt = datetime.strptime(datum_string, "%d.%m.%Y")
-                except ValueError:
-                    datum_objekt = None
-            if datum_objekt:
-                artikel['datum'] = datum_objekt.strftime("%Y-%m-%d")
-                artikel['kalenderwoche'] = datum_objekt.isocalendar().week
-                artikel['monat'] = datum_objekt.month
-        
-        vollstaendigkeit_pruefen(artikel)
-    return einkaeufe
-
-
 def vollstaendigkeit_pruefen(artikel):
     relevante_felder = ["produkt", "bio", "kategorie", "menge", "einheit", "einzelpreis", "haendler", "datum"]
     artikel["vollstaendig"] = all(artikel.get(feld) not in [None, "", "unbekannt"] for feld in relevante_felder)
     return artikel
-
-
-def daten_speichern(dateiname, einkaeufe):
-    with open(dateiname, "w", encoding="utf-8") as datei:
-        json.dump(einkaeufe, datei, ensure_ascii=False, indent=4)
 
                 
 def auswahl_aus_liste(titel, optionen, stammdaten, schluessel, stammdaten_datei):
@@ -378,14 +402,14 @@ def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_l
         return einkaeufe, kategorie_zuordnung
     vollstaendig = True
     
-    artikel = {"produkt": produkt, "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, "vollstaendig": vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, "vollstaendig": vollstaendig}
     vollstaendigkeit_pruefen(artikel)
 
     einkaeufe.append(artikel)
     return einkaeufe, kategorie_zuordnung
 
 
-def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping):
     produkt = eingabe_mit_abbruch('Produkt')
     if produkt is None:
         return einkaeufe, kategorie_zuordnung
@@ -410,13 +434,12 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
         print(f"Vorgeschlagene Kategorie: {kategorie}")
     kategorie_zuordnung = kategorie_zuordnung_lernen(produkt, kategorie, kategorie_zuordnung)
     menge = None
-    einheit = ''
+    einheit = 'unbekannt'
     vollstaendig = False
     
-    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt, "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
     
     einkaeufe.append(artikel)
-    print("DEBUG Anzahl Einkäufe:", len(einkaeufe))
     return einkaeufe, kategorie_zuordnung
 
 
@@ -449,6 +472,10 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
             if 1 <= auswahl <= len(eintraege_unvollstaendig):
                 index = auswahl - 1
                 eintrag_auswahl = eintraege_unvollstaendig[index]
+                if 'produkt_original' not in eintrag_auswahl:
+                    eintrag_auswahl['produkt_original'] = eintrag_auswahl['produkt']
+                if 'produkt_standard' not in eintrag_auswahl:
+                    eintrag_auswahl['produkt_standard'] = eintrag_auswahl['produkt']
                 if eintrag_auswahl['bio'] == 'unbekannt':
                     while True:
                         bio = eingabe_mit_abbruch('Bio')
@@ -529,7 +556,17 @@ def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_li
                         if produkt is None:
                             continue
                         produkt = produkt.title()
+                        while True:
+                            wert = input(f'Soll {produkt} auch der Standardname sein? ja/nein: ').strip().lower()
+                            if wert == 'ja':
+                                eintrag_auswahl['produkt_standard'] = produkt
+                                break
+                            elif wert == 'nein':
+                                break
+                            else:
+                                print("Bitte ja oder nein eingeben.")
                         eintrag_auswahl['produkt'] = produkt
+                        eintrag_auswahl['produkt_original'] = produkt
                     elif wahl == '2':
                         while True:
                             bio = eingabe_mit_abbruch('Bio')
@@ -772,10 +809,10 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '2':
-            einkaeufe, kategorie_zuordnung = schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
-            print("DEBUG nach Schnellerfassung:", len(einkaeufe))
+            einkaeufe, kategorie_zuordnung = schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(dateiname, mapping)
         elif wahl == '3':
             pdf_dateiname = eingabe_mit_abbruch('PDF-Dateiname: ')
             if pdf_dateiname is None:
@@ -869,8 +906,10 @@ def menue_auswertungen(einkaeufe):
 
 dateiname = "einkaeufe.json"
 stammdaten_datei = "stammdaten.json"
+produkt_mapping_datei = "produkt_mapping.json"
 
 stammdaten = stammdaten_laden(stammdaten_datei)
+mapping = produkt_mapping_laden(produkt_mapping_datei)
 
 kategorien_liste = stammdaten.get("KATEGORIEN", [])
 haendler_liste = stammdaten.get("HAENDLER", [])
