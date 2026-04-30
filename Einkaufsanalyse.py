@@ -413,7 +413,7 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
     einheit = ''
     vollstaendig = False
     
-    artikel = {"produkt": produkt, "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt, "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
     
     einkaeufe.append(artikel)
     print("DEBUG Anzahl Einkäufe:", len(einkaeufe))
