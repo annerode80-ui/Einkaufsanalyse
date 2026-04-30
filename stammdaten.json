@@ -1,0 +1,91 @@
+{
+    "KATEGORIEN": [
+        "Obst",
+        "Gemüse",
+        "Backwaren",
+        "Süßigkeiten",
+        "Snacks",
+        "Milch(ersatz)-Produkte",
+        "Convenience",
+        "Fleisch/Wurst/Eier",
+        "Fisch",
+        "Käse",
+        "Nudeln",
+        "Reis",
+        "Backzutaten",
+        "Alkohol",
+        "Getränke",
+        "Reinigungsmittel",
+        "Hygieneartikel",
+        "Wäschepflege",
+        "Sonstiges",
+        "Test"
+    ],
+    "HAENDLER": [
+        "Rewe",
+        "Aldi",
+        "Lidl",
+        "Edeka",
+        "dm",
+        "Rossmann",
+        "Sonstiges",
+        "Kaufland",
+        "Test"
+    ],
+    "EINHEITEN": [
+        "Stück",
+        "Packung",
+        "Flasche",
+        "Glas",
+        "Kg",
+        "Sonstiges"
+    ],
+    "KATEGORIE_ZUORDNUNG": {
+        "Obst": [
+            "APFEL",
+            "BANANE",
+            "BIRNE GRUEN"
+        ],
+        "Gemüse": [],
+        "Fleisch/Wurst/Eier": [
+            "GEFL. SALAMI",
+            "KASSELER",
+            "HAEHN.BRUSTFILET",
+            "BIO EIER OKT"
+        ],
+        "Käse": [
+            "TILSITER SCHEIB.",
+            "BIO EMMENTALER",
+            "PARM. REGG. STK."
+        ],
+        "Convenience": [
+            "BACKCAMEMBERT"
+        ],
+        "Gemüse": [
+            "KART.MEHLIGKOCH.",
+            "ZWIEBEL ROT BIO",
+            "KOHLRABI"
+        ],
+        "Milch(ersatz)-Produkte": [
+            "STREICHGUT",
+            "JOG STRACCIATELL",
+            "MW BIO JOGH.3,8%"
+        ],
+        "Wäschepflege": [
+            "WAESCHEKLAMMERN"
+        ],
+        "Alkohol": [
+            "HANSE PORTER"
+        ],
+        "Backzutaten": [
+            "BIO WEIZENMEHL",
+            "BIO ROGGENVKMEHL",
+            "BIO BACKHEFE"
+        ],
+        "Sonstiges": [],
+        "Test": [
+            "TEST",
+            "TESTEN"
+        ]
+    }
+}
