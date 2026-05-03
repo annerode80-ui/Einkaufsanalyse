@@ -107,8 +107,28 @@ def produkt_standard_bestimmen(produkt, mapping):
     return produkt
 
 
-def produkt_mapping_speichern(dateiname, mapping):
-    with open(dateiname, "w", encoding="utf-8") as datei:
+def produkt_mapping_ergaenzen(artikel_liste, mapping):
+    bearbeitet = set()
+    for artikel in artikel_liste:
+        if artikel['produkt_standard'] == artikel['produkt_original'] and artikel['produkt_original'] not in bearbeitet:
+            
+            wert = input(
+                f'Standardname für "{artikel["produkt_original"]}" eingeben (Enter = Artikel überspringen): '
+            ).strip()
+
+            if wert != '':
+                wert = wert.title()
+
+                artikel['produkt_standard'] = wert
+                mapping[artikel['produkt_original']] = wert
+            
+            bearbeitet.add(artikel['produkt_original'])
+
+    return artikel_liste, mapping
+
+
+def produkt_mapping_speichern(produkt_mapping_datei, mapping):
+    with open(produkt_mapping_datei, "w", encoding="utf-8") as datei:
         json.dump(mapping, datei, ensure_ascii=False, indent=4)
 
 
@@ -367,7 +387,7 @@ def datum_eingeben(text):
             print("Bitte Datum als TT.MM.JJJJ eingeben: ")
 
 
-def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping):
     produkt = eingabe_mit_abbruch('Produkt')
     if produkt is None:
         return einkaeufe, kategorie_zuordnung
@@ -805,14 +825,14 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
         wahl = input('Menü-Auswahl: ').strip()
 
         if wahl == '1':
-            einkaeufe, kategorie_zuordnung = eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
+            einkaeufe, kategorie_zuordnung = eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '2':
             einkaeufe, kategorie_zuordnung = schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
-            produkt_mapping_speichern(dateiname, mapping)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
         elif wahl == '3':
             pdf_dateiname = eingabe_mit_abbruch('PDF-Dateiname: ')
             if pdf_dateiname is None:
@@ -827,8 +847,11 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
                     continue
             print(f'{len(neue_artikel)} Artikel wurden importiert.')
             alle_einkaeufe_anzeigen(neue_artikel)
+            produkt_mapping_ergaenzen(neue_artikel, mapping)
             einkaeufe.extend(neue_artikel)
             daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
+
         elif wahl == '9':
             return einkaeufe, kategorie_zuordnung
         else:
