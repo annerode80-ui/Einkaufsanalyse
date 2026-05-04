@@ -1,11 +1,55 @@
+"""
+ARTIKEL-DATENMODELL:
 
-#test
+produkt:
+    Produktname aus dem Kassenbon (aktueller Arbeitswert)
+produkt_original:
+    Originalbezeichnung aus dem Kassenbon (unverändert)
+produkt_standard:
+    Vereinheitlichter Name für Auswertungen
+    → ermöglicht Vergleichbarkeit zwischen Händlern
+    → verbessert Lesbarkeit
+bio:
+    "ja" / "nein" / "unbekannt"
+    → für Auswertungen
+kategorie:
+    Produktkategorie aus vorgegebener, erweiterbarer Liste
+    → automatische Zuordnung möglich
+menge:
+    gekaufte Menge laut Kassenbon
+einheit:
+    Verpackungseinheit (z. B. "Glas", "Packung")
+    → aus vorgegebener, erweiterbarer Liste
+inhalt_menge:
+    Inhalt der Verpackung (z. B. 200)
+inhalt_einheit:
+    Einheit des Inhalts (z. B. "g", "Stück")
+einzelpreis:
+    Kaufpreis für die gekaufte Einheit laut Kassenbon
+haendler:
+    Händler aus vorgegebener, erweiterbarer Liste
+datum:
+    Kaufdatum im ISO-Format (YYYY-MM-DD)
+kalenderwoche:
+    aus Datum abgeleitet, für Auswertungen
+monat:
+    aus Datum abgeleitet, für Auswertungen
+bon_id:
+    eindeutige ID aus Händler, Datum/Uhrzeit und Bonnummer
+vollstaendig:
+    True / False
+    → Kennzeichnet, ob alle relevanten Felder gepflegt sind
+"""
+
 import json
 from datetime import datetime
 import re
 from pypdf import PdfReader
 
-
+"""
+Lädt alle Einkäufe aus einer JSON-Datei.
+Rückgabe: Liste von Artikel-Dictionaries
+"""
 def daten_laden(dateiname):
     try:
         with open(dateiname, "r", encoding="utf-8") as datei:
@@ -59,12 +103,15 @@ def daten_laden(dateiname):
         vollstaendigkeit_pruefen(artikel)
     return einkaeufe
 
-
+"""
+Speichert alle Einkäufe als JSON-Datei.
+Parameter: einkaeufe: Liste von Artikel-Dictionaries
+"""
 def daten_speichern(dateiname, einkaeufe):
     with open(dateiname, "w", encoding="utf-8") as datei:
         json.dump(einkaeufe, datei, ensure_ascii=False, indent=4)
 
-
+"""Lädt Stammdaten (Kategorien, Händler, Einheiten, Zuordnungen) aus JSON-Datei."""
 def stammdaten_laden(dateiname):
     try:
         with open(dateiname, "r", encoding="utf-8") as datei:
@@ -77,17 +124,20 @@ def stammdaten_laden(dateiname):
         print("Stammdaten-Datei ist fehlerhaft.")
         return {}
 
-
+"""
+Aktualisiert Stammdaten und speichert sie.
+Wird verwendet, wenn neue Kategorien oder Zuordnungen gelernt wurden.
+"""
 def stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, dateiname):
     stammdaten["KATEGORIE_ZUORDNUNG"] = kategorie_zuordnung
     stammdaten_speichern(stammdaten_datei, stammdaten)
 
-
+"""Speichert Stammdaten in eine JSON-Datei."""
 def stammdaten_speichern(dateiname, stammdaten):
     with open(dateiname, "w", encoding="utf-8") as datei:
         json.dump(stammdaten, datei, ensure_ascii=False, indent=4)
 
-
+"""Lädt das Mapping zwischen produkt_original und produkt_standard."""
 def produkt_mapping_laden(dateiname):
     try:
         with open(dateiname, "r", encoding="utf-8") as datei:
@@ -100,13 +150,19 @@ def produkt_mapping_laden(dateiname):
         print("Produkt-Mapping-Datei ist fehlerhaft.")
         return {}
 
-
+"""
+Bestimmt den standardisierten Produktnamen.
+Gibt den Mapping-Wert zurück, falls vorhanden, sonst den Originalnamen.
+"""
 def produkt_standard_bestimmen(produkt, mapping):
     if produkt in mapping:
         return mapping[produkt]
     return produkt
 
-
+"""
+Ergänzt das Mapping für neue Artikel.
+Für unbekannte Produkte kann ein Standardname eingegeben werden. Mapping wird direkt erweitert.
+"""
 def produkt_mapping_ergaenzen(artikel_liste, mapping):
     bearbeitet = set()
     for artikel in artikel_liste:
@@ -126,7 +182,7 @@ def produkt_mapping_ergaenzen(artikel_liste, mapping):
 
     return artikel_liste, mapping
 
-
+"""Speichert das Produkt-Mapping in eine JSON-Datei."""
 def produkt_mapping_speichern(produkt_mapping_datei, mapping):
     with open(produkt_mapping_datei, "w", encoding="utf-8") as datei:
         json.dump(mapping, datei, ensure_ascii=False, indent=4)
@@ -144,7 +200,7 @@ def pdf_text_auslesen(dateiname):
 
     return text
 
-
+"""Erzeugt aus dem PDF-Import eines Rewe-Kassenbons die Artikelliste"""
 def rewe_text_zu_artikeln(text):
     artikel_liste = []
     zeilen = text.splitlines()
@@ -230,7 +286,8 @@ def rewe_text_zu_artikeln(text):
         
         kategorie = kategorie_vorschlagen(produkt, kategorie_zuordnung)
         
-        artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
+        artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "inhalt_menge": None,
+"inhalt_einheit": "unbekannt", "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
         artikel_liste.append(artikel)
         letzter_artikel = artikel
     return artikel_liste
@@ -422,7 +479,8 @@ def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_l
         return einkaeufe, kategorie_zuordnung
     vollstaendig = True
     
-    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, "vollstaendig": vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": None,
+"inhalt_einheit": "unbekannt", "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, "vollstaendig": vollstaendig}
     vollstaendigkeit_pruefen(artikel)
 
     einkaeufe.append(artikel)
@@ -457,7 +515,8 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
     einheit = 'unbekannt'
     vollstaendig = False
     
-    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": None,
+"inhalt_einheit": "unbekannt", "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
     
     einkaeufe.append(artikel)
     return einkaeufe, kategorie_zuordnung
@@ -496,6 +555,10 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
                     eintrag_auswahl['produkt_original'] = eintrag_auswahl['produkt']
                 if 'produkt_standard' not in eintrag_auswahl:
                     eintrag_auswahl['produkt_standard'] = eintrag_auswahl['produkt']
+                if 'inhalt_menge' not in eintrag_auswahl:
+                    eintrag_auswahl['inhalt_menge'] = None
+                if 'inhalt_einheit' not in eintrag_auswahl:
+                    eintrag_auswahl['inhalt_einheit'] = "unbekannt"
                 if eintrag_auswahl['bio'] == 'unbekannt':
                     while True:
                         bio = eingabe_mit_abbruch('Bio')

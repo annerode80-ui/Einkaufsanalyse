@@ -726,5 +726,22 @@
         "vollstaendig": false,
         "zeit": "17:09",
         "bon_id": "Rewe-2026-04-20-17:09-8061"
+    },
+    {
+        "produkt": "Apfel",
+        "produkt_original": "Apfel",
+        "produkt_standard": "Apfel",
+        "bio": "unbekannt",
+        "kategorie": "Obst",
+        "menge": null,
+        "einheit": "unbekannt",
+        "einzelpreis": 1.99,
+        "inhalt_menge": null,
+        "inhalt_einheit": "unbekannt",
+        "haendler": "Rewe",
+        "datum": "2026-05-04",
+        "kalenderwoche": 19,
+        "monat": 5,
+        "vollstaendig": false
     }
 ]
