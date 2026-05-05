@@ -188,6 +188,63 @@ def produkt_mapping_speichern(produkt_mapping_datei, mapping):
         json.dump(mapping, datei, ensure_ascii=False, indent=4)
 
 
+def produkt_inhalte_laden(dateiname):
+    try:
+        with open(dateiname, "r", encoding="utf-8") as datei:
+             inhalte = json.load(datei)
+             return inhalte
+    except FileNotFoundError:
+        print("Hinweis: produkt_inhalte.json nicht gefunden – wird neu erstellt.")
+        return {}
+    except json.JSONDecodeError:
+        print("Fehler: produkt_inhalte.json ist beschädigt.")
+        return {}
+
+
+def produkt_inhalte_bestimmen(produkt, inhalte):
+    if produkt in inhalte:
+        return inhalte[produkt]
+    return {'inhalt_menge': None, 'inhalt_einheit': 'unbekannt'}
+
+
+def produkt_inhalte_ergaenzen(artikel_liste, inhalte):
+    bearbeitet = set()
+    for artikel in artikel_liste:
+        if artikel['inhalt_menge'] == None and artikel ['inhalt_einheit'] == 'unbekannt' and artikel['produkt_original']not in bearbeitet:
+            produkt_original = artikel['produkt_original']
+            menge_text = input(
+                f'Bitte die Produktmenge für "{artikel["produkt_original"]}" eingeben (Enter = Artikel überspringen): '
+            ).strip()
+            if menge_text == '':
+                bearbeitet.add(artikel['produkt_original'])
+            einheit = input(
+                f'Bitte die Einheit der Produktmenge für "{artikel["produkt_original"]}" eingeben (Enter = Artikel überspringen): '
+            ).strip()
+            if einheit == '':
+                bearbeitet.add(artikel['produkt_original'])
+            try:
+                menge = float(menge_text.replace(',', '.'))
+            except ValueError:
+                print("Menge konnte nicht gelesen werden. Artikel wird übersprungen.")
+                bearbeitet.add(produkt_original)
+                continue
+
+            einheit = einheit.title()
+
+            artikel['inhalt_menge'] = menge
+            artikel['inhalt_einheit'] = einheit
+            inhalte[produkt_original] = {'inhalt_menge': menge, 'inhalt_einheit': einheit}
+            
+            bearbeitet.add(artikel['produkt_original'])
+
+    return artikel_liste, inhalte
+
+
+def produkt_inhalte_speichern(produkt_inhalte_datei, inhalte):
+    with open(produkt_inhalte_datei, "w", encoding="utf-8") as datei:
+        json.dump(inhalte, datei, ensure_ascii=False, indent=4)
+
+
 def pdf_text_auslesen(dateiname):
     reader = PdfReader(dateiname)
 
@@ -201,7 +258,7 @@ def pdf_text_auslesen(dateiname):
     return text
 
 """Erzeugt aus dem PDF-Import eines Rewe-Kassenbons die Artikelliste"""
-def rewe_text_zu_artikeln(text):
+def rewe_text_zu_artikeln(text, mapping, inhalte):
     artikel_liste = []
     zeilen = text.splitlines()
     ignorieren = ['LEERG', 'EURO', 'EUR', 'SUMME', 'A=', 'B=', 'GESAMTBETRAG', 'STEUER', 'NETTO', 'BRUTTO', 'KUNDENBELEG', 'DATUM:', 'UHRZEIT:', 'BELEG-NR', 'TRACE-NR', 'BEZAHLUNG', 'CONTACTLESS', 'VISA', 'NR.', 'VU-NR', 'TERMINAL-ID', 'POS-INFO', 'AS-ZEIT', 'AS-PROC-CODE', 'CAPT.-REF', 'APPROVED', 'ZAHLUNG ERFOLGT', 'BETRAG']
@@ -253,6 +310,8 @@ def rewe_text_zu_artikeln(text):
 
                     letzter_artikel['menge'] = menge
                     letzter_artikel['einheit'] = einheit
+                    letzter_artikel['inhalt_menge'] = menge
+                    letzter_artikel['inhalt_einheit'] = einheit
                     letzter_artikel['einzelpreis'] = round(einzelpreis, 2)
                 except (ValueError, IndexError, ZeroDivisionError):
                     pass
@@ -283,14 +342,14 @@ def rewe_text_zu_artikeln(text):
             bio = 'ja'
         else:
             bio = 'unbekannt'
-        
+        inhalt = produkt_inhalte_bestimmen(produkt, inhalte)
         kategorie = kategorie_vorschlagen(produkt, kategorie_zuordnung)
         
-        artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "inhalt_menge": None,
-"inhalt_einheit": "unbekannt", "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
+        artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "inhalt_menge": inhalt['inhalt_menge'],
+"inhalt_einheit": inhalt['inhalt_einheit'], "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
         artikel_liste.append(artikel)
         letzter_artikel = artikel
-    return artikel_liste
+    return artikel_liste, mapping, inhalte
 
 
 def kategorie_vorschlagen (produkt, kategorie_zuordnung):
@@ -353,9 +412,9 @@ def rewe_bonnummer_aus_text(text):
     return None
 
 
-def rewe_pdf_import(dateiname):
+def rewe_pdf_import(dateiname, mapping, inhalte):
     text = pdf_text_auslesen(dateiname)
-    artikel_liste = rewe_text_zu_artikeln(text)
+    artikel_liste, mapping, inhalte = rewe_text_zu_artikeln(text, mapping, inhalte)
     datum, zeit, kw, monat = rewe_datum_aus_text(text)
     bonnummer = rewe_bonnummer_aus_text(text)
     bon_id = f'Rewe-{datum}-{zeit}-{bonnummer}'
@@ -367,7 +426,7 @@ def rewe_pdf_import(dateiname):
         artikel['monat'] = monat
         artikel['bon_id'] = bon_id
         vollstaendigkeit_pruefen(artikel)
-    return artikel_liste
+    return artikel_liste, mapping, inhalte
 
 
 def vollstaendigkeit_pruefen(artikel):
@@ -444,7 +503,7 @@ def datum_eingeben(text):
             print("Bitte Datum als TT.MM.JJJJ eingeben: ")
 
 
-def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping):
+def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
     produkt = eingabe_mit_abbruch('Produkt')
     if produkt is None:
         return einkaeufe, kategorie_zuordnung
@@ -477,17 +536,18 @@ def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_l
     datum_iso, kw, monat = datum_eingeben('Datum')
     if datum_iso is None:
         return einkaeufe, kategorie_zuordnung
+    inhalt = produkt_inhalte_bestimmen(produkt, inhalte)
     vollstaendig = True
     
-    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": None,
-"inhalt_einheit": "unbekannt", "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, "vollstaendig": vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": inhalt['inhalt_menge'],
+"inhalt_einheit": inhalt['inhalt_einheit'], "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
     vollstaendigkeit_pruefen(artikel)
 
     einkaeufe.append(artikel)
-    return einkaeufe, kategorie_zuordnung
+    return einkaeufe, kategorie_zuordnung, mapping, inhalte
 
 
-def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping):
+def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
     produkt = eingabe_mit_abbruch('Produkt')
     if produkt is None:
         return einkaeufe, kategorie_zuordnung
@@ -513,13 +573,14 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
     kategorie_zuordnung = kategorie_zuordnung_lernen(produkt, kategorie, kategorie_zuordnung)
     menge = None
     einheit = 'unbekannt'
+    inhalt = produkt_inhalte_bestimmen(produkt, inhalte)
     vollstaendig = False
     
-    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": None,
-"inhalt_einheit": "unbekannt", "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
+    artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": menge, "einheit": einheit, "einzelpreis": preis_pro_einheit, "inhalt_menge": inhalt['inhalt_menge'],
+"inhalt_einheit": inhalt['inhalt_einheit'], "haendler": haendler, "datum": datum_iso, "kalenderwoche": kw, "monat": monat, 'vollstaendig': vollstaendig}
     
     einkaeufe.append(artikel)
-    return einkaeufe, kategorie_zuordnung
+    return einkaeufe, kategorie_zuordnung, mapping, inhalte
 
 
 def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
@@ -875,7 +936,7 @@ def gesamtbetrag(einkaeufe):
     print(f"Der Gesamtbetrag für alle vollständigen Artikel beträgt: {gesamt:.2f} €")
 
 
-def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
     while True:
         print('\n' + '=' * 50)
         print('Einträge erfassen')
@@ -888,19 +949,22 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
         wahl = input('Menü-Auswahl: ').strip()
 
         if wahl == '1':
-            einkaeufe, kategorie_zuordnung = eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping)
-            stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
-            daten_speichern(dateiname, einkaeufe)
-        elif wahl == '2':
-            einkaeufe, kategorie_zuordnung = schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping)
+            einkaeufe, kategorie_zuordnung, mapping, inhalte = eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
             produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
+        elif wahl == '2':
+            einkaeufe, kategorie_zuordnung, mapping, inhalte = schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
+            stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
+            daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
         elif wahl == '3':
             pdf_dateiname = eingabe_mit_abbruch('PDF-Dateiname: ')
             if pdf_dateiname is None:
                 continue
-            neue_artikel = rewe_pdf_import(pdf_dateiname)
+            neue_artikel, mapping, inhalte = rewe_pdf_import(pdf_dateiname, mapping, inhalte)
             if neue_artikel:
                 neue_bon_id = neue_artikel[0].get('bon_id')
                 if neue_bon_id is None:
@@ -910,13 +974,15 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
                     continue
             print(f'{len(neue_artikel)} Artikel wurden importiert.')
             alle_einkaeufe_anzeigen(neue_artikel)
-            produkt_mapping_ergaenzen(neue_artikel, mapping)
+            neue_artikel, mapping = produkt_mapping_ergaenzen(neue_artikel, mapping)
+            neue_artikel, inhalte = produkt_inhalte_ergaenzen(neue_artikel, inhalte)
             einkaeufe.extend(neue_artikel)
             daten_speichern(dateiname, einkaeufe)
             produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
 
         elif wahl == '9':
-            return einkaeufe, kategorie_zuordnung
+            return einkaeufe, kategorie_zuordnung, mapping, inhalte
         else:
             print('Fehlerhafte Eingabe.')
             
@@ -989,42 +1055,44 @@ def menue_auswertungen(einkaeufe):
 # Hauptprogramm (Menü)
 # ------------------------
 
+if __name__ == "__main__":
+    dateiname = "einkaeufe.json"
+    stammdaten_datei = "stammdaten.json"
+    produkt_mapping_datei = "produkt_mapping.json"
+    produkt_inhalte_datei = "produkt_inhalte.json"
 
-dateiname = "einkaeufe.json"
-stammdaten_datei = "stammdaten.json"
-produkt_mapping_datei = "produkt_mapping.json"
+    stammdaten = stammdaten_laden(stammdaten_datei)
+    mapping = produkt_mapping_laden(produkt_mapping_datei)
+    inhalte = produkt_inhalte_laden(produkt_inhalte_datei)
 
-stammdaten = stammdaten_laden(stammdaten_datei)
-mapping = produkt_mapping_laden(produkt_mapping_datei)
+    kategorien_liste = stammdaten.get("KATEGORIEN", [])
+    haendler_liste = stammdaten.get("HAENDLER", [])
+    einheiten_liste = stammdaten.get("EINHEITEN", [])
+    kategorie_zuordnung = stammdaten.get("KATEGORIE_ZUORDNUNG", {})
+    if not isinstance(kategorie_zuordnung, dict):
+        kategorie_zuordnung = {}
+    einkaeufe = daten_laden(dateiname)
 
-kategorien_liste = stammdaten.get("KATEGORIEN", [])
-haendler_liste = stammdaten.get("HAENDLER", [])
-einheiten_liste = stammdaten.get("EINHEITEN", [])
-kategorie_zuordnung = stammdaten.get("KATEGORIE_ZUORDNUNG", {})
-if not isinstance(kategorie_zuordnung, dict):
-    kategorie_zuordnung = {}
-einkaeufe = daten_laden(dateiname)
+    while True:
+        print('\n' + '=' * 50)
+        print('Einkaufsprotokoll')
+        print('=' * 50)
+        print('1 = Erfassung')
+        print('2 = Bearbeitung')
+        print('3 = Auswertungen')
+        print('9 = Programm beenden')
 
-while True:
-    print('\n' + '=' * 50)
-    print('Einkaufsprotokoll')
-    print('=' * 50)
-    print('1 = Erfassung')
-    print('2 = Bearbeitung')
-    print('3 = Auswertungen')
-    print('9 = Programm beenden')
+        wahl = input('Menü-Auswahl: ').strip()
 
-    wahl = input('Menü-Auswahl: ').strip()
-
-    if wahl == '1':
-        einkaeufe, kategorie_zuordnung = menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
-    elif wahl == '2':
-        einkaeufe, kategorie_zuordnung = menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
-    elif wahl == '3':
-        menue_auswertungen(einkaeufe)
-    elif wahl == '9':
-        daten_speichern(dateiname, einkaeufe)
-        print('Programm beendet.')
-        break
-    else:
-        print('Fehlerhafte Eingabe.')
+        if wahl == '1':
+            einkaeufe, kategorie_zuordnung, mapping, inhalte = menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
+        elif wahl == '2':
+            einkaeufe, kategorie_zuordnung, mapping, inhalte = menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
+        elif wahl == '3':
+            menue_auswertungen(einkaeufe)
+        elif wahl == '9':
+            daten_speichern(dateiname, einkaeufe)
+            print('Programm beendet.')
+            break
+        else:
+            print('Fehlerhafte Eingabe.')
