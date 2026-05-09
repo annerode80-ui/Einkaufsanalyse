@@ -72,11 +72,17 @@ def daten_laden(dateiname):
         if 'einheit' not in artikel or str(artikel['einheit']).strip() == '':
             artikel['einheit'] = 'unbekannt'
 
+        if 'inhalt_einheit' not in artikel or str(artikel['inhalt_einheit']).strip() == '':
+            artikel['inhalt_einheit'] = 'unbekannt'
+
         if 'bio' not in artikel or artikel['bio'] not in ['ja', 'nein']:
             artikel['bio'] = 'unbekannt'
 
         if 'menge' not in artikel or artikel['menge'] is None or artikel['menge'] == '':
             artikel['menge'] = None
+
+        if 'inhalt_menge' not in artikel or artikel['inhalt_menge'] is None or artikel['inhalt_menge'] == '':
+            artikel['inhalt_menge'] = None
 
         if 'einzelpreis' not in artikel or artikel['einzelpreis'] is None or artikel['einzelpreis'] == '':
             artikel['einzelpreis'] = None
@@ -430,9 +436,19 @@ def rewe_pdf_import(dateiname, mapping, inhalte):
 
 
 def vollstaendigkeit_pruefen(artikel):
-    relevante_felder = ["produkt", "bio", "kategorie", "menge", "einheit", "einzelpreis", "haendler", "datum"]
+    relevante_felder = ["produkt", "produkt_standard", "bio", "kategorie", "menge", "einheit", "inhalt_menge", "inhalt_einheit", "einzelpreis", "haendler", "datum"]
+
     artikel["vollstaendig"] = all(artikel.get(feld) not in [None, "", "unbekannt"] for feld in relevante_felder)
     return artikel
+
+
+def unvollstaendige_artikel_sammeln(einkaeufe):
+    unvollstaendige = []
+    for artikel in einkaeufe:
+        vollstaendigkeit_pruefen(artikel)
+        if not artikel.get('vollstaendig', False):
+            unvollstaendige.append(artikel)
+    return unvollstaendige
 
                 
 def auswahl_aus_liste(titel, optionen, stammdaten, schluessel, stammdaten_datei):
@@ -530,6 +546,12 @@ def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_l
     preis_pro_einheit = zahl_eingeben('Einzelpreis')
     if preis_pro_einheit is None:
         return einkaeufe, kategorie_zuordnung
+    inhalt_menge = zahl_eingeben('Menge in der Verpackung')
+    if inhalt_menge is None:
+        return einkaeufe, kategorie_zuordnung
+    inhalt_einheit = auswahl_aus_liste( "Einheit der Verpackungsmenge auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
+    if inhalt_einheit is None:
+        return einkaeufe, kategorie_zuordnung
     haendler = auswahl_aus_liste("Händler auswählen:", haendler_liste, stammdaten, "HAENDLER", stammdaten_datei)
     if haendler is None:
         return einkaeufe, kategorie_zuordnung
@@ -587,21 +609,12 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
         return einkaeufe, kategorie_zuordnung
-    gefunden = False
-    for artikel in einkaeufe:
-        if not isinstance(artikel, dict):
-            continue
-        if not artikel["vollstaendig"]:
-            gefunden = True
-    if not gefunden:
-        print("Keine unvollständigen Einträge vorhanden.")
+    eintraege_unvollstaendig = unvollstaendige_artikel_sammeln(einkaeufe)
+    if not eintraege_unvollstaendig:
+        print("Keine unvollständigen Einträge vorhanden.")
         return einkaeufe, kategorie_zuordnung
-    eintraege_unvollstaendig = []
-    for artikel in einkaeufe:
-        if not artikel["vollstaendig"]:
-            eintraege_unvollstaendig.append(artikel)
     for i, artikel in enumerate(eintraege_unvollstaendig, start=1):
-        print(f"{i}: {artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['haendler']}")
+        print(f"{i}: {artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['inhalt_menge']} {artikel['inhalt_einheit']} | {artikel['haendler']}")
         print("-" * 100)
     while True:
         try:
@@ -648,7 +661,17 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
                     einheit = auswahl_aus_liste( "Einheit auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
                     if einheit is None:
                         continue
-                    eintrag_auswahl['einheit'] = einheit 
+                    eintrag_auswahl['einheit'] = einheit
+                if eintrag_auswahl['inhalt_menge'] == None:
+                    inhalt_menge = zahl_eingeben('Menge')
+                    if inhalt_menge is None:
+                        continue
+                    eintrag_auswahl['inhalt_menge'] = inhalt_menge
+                if eintrag_auswahl['inhalt_einheit'] == 'unbekannt':
+                    inhalt_einheit = auswahl_aus_liste( "Einheit auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
+                    if inhalt_einheit is None:
+                        continue
+                    eintrag_auswahl['inhalt_einheit'] = inhalt_einheit 
                 vollstaendigkeit_pruefen(eintrag_auswahl)
                 return einkaeufe, kategorie_zuordnung
             else:
@@ -824,15 +847,14 @@ def unvollstaendige_einkaeufe_anzeigen(einkaeufe):
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
         return
-    print("Folgende Einträge sind unvollständig und müssen bearbeitet werden:\n")
-    gefunden = False
-    for artikel in sorted(einkaeufe, key=lambda x: x['datum']):
-        if not artikel['vollstaendig']:
-            print(f"{artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['haendler']} | {artikel['vollstaendig']}")
-            print("-" * 100)
-            gefunden = True
-    if not gefunden:
+    unvollstaendige = unvollstaendige_artikel_sammeln(einkaeufe)
+    if len(unvollstaendige) == 0:
         print("Alle Einträge sind vollständig und können ausgewertet werden.")
+        return
+    print("Folgende Einträge sind unvollständig und müssen bearbeitet werden:\n")
+    for artikel in unvollstaendige:
+        print(f"{artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} €| {artikel['inhalt_menge']} {artikel['inhalt_einheit']}  | {artikel['haendler']} | {artikel['vollstaendig']}")
+        print("-" * 100)
                                 
 
 def kategorie_uebersicht(einkaeufe):
@@ -974,6 +996,8 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
                     continue
             print(f'{len(neue_artikel)} Artikel wurden importiert.')
             alle_einkaeufe_anzeigen(neue_artikel)
+            unvollstaendige = unvollstaendige_artikel_sammeln(einkaeufe)
+            print(f'{len(unvollstaendige)} importierte Artikel sind noch unvollständig.')
             neue_artikel, mapping = produkt_mapping_ergaenzen(neue_artikel, mapping)
             neue_artikel, inhalte = produkt_inhalte_ergaenzen(neue_artikel, inhalte)
             einkaeufe.extend(neue_artikel)

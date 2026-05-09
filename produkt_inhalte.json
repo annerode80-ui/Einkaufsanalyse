@@ -1,1 +1,10 @@
-{}
+{
+    "TORTILLAS SALZ": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "G"
+    },
+    "HANSE PORTER": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "Ml"
+    }
+}
