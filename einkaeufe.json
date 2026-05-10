@@ -16,7 +16,14 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "BIO MAASDAMER",
@@ -35,32 +42,40 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "BIO MOZZARELLA",
         "produkt_original": "BIO MOZZARELLA",
         "produkt_standard": "Mozzarella",
         "bio": "ja",
-        "kategorie": "unbekannt",
+        "kategorie": "Käse",
         "menge": 3.0,
         "einheit": "Stk",
         "einzelpreis": 1.29,
-        "inhalt_menge": null,
-        "inhalt_einheit": "unbekannt",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "G",
         "haendler": "Rewe",
         "datum": "2026-04-25",
         "kalenderwoche": 17,
         "monat": 4,
-        "vollstaendig": false,
+        "vollstaendig": true,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": []
     },
     {
         "produkt": "PIZZATEIG M.SA.",
         "produkt_original": "PIZZATEIG M.SA.",
         "produkt_standard": "Pizzateig",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -73,13 +88,20 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "BIRNE GRUEN",
         "produkt_original": "BIRNE GRUEN",
         "produkt_standard": "Birne",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "Obst",
         "menge": 0.79,
         "einheit": "kg",
@@ -90,15 +112,16 @@
         "datum": "2026-04-25",
         "kalenderwoche": 17,
         "monat": 4,
-        "vollstaendig": false,
+        "vollstaendig": true,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": []
     },
     {
         "produkt": "KARTOFFELN DICK",
         "produkt_original": "KARTOFFELN DICK",
         "produkt_standard": "Kartoffeln",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -111,13 +134,20 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "BASILIKUM",
         "produkt_original": "BASILIKUM",
         "produkt_standard": "Basilikum",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -130,7 +160,14 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "MW BIO JOGH.3,8%",
@@ -149,7 +186,13 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "BIO JOGH. HIMB.",
@@ -168,13 +211,20 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "JOG STRACCIATELL",
         "produkt_original": "JOG STRACCIATELL",
         "produkt_standard": "Joghurt Stracciatella",
-        "bio": "unbekannt",
+        "bio": "ja",
         "kategorie": "Milch(ersatz)-Produkte",
         "menge": null,
         "einheit": "unbekannt",
@@ -187,13 +237,19 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "SCHLEMMERF. ITAL",
         "produkt_original": "SCHLEMMERF. ITAL",
         "produkt_standard": "Schlemmerfilet Italienisch",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -206,32 +262,40 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "SCHLEMMERFILET",
         "produkt_original": "SCHLEMMERFILET",
         "produkt_standard": "Schlemmerfilet Bordelaise",
-        "bio": "unbekannt",
-        "kategorie": "unbekannt",
-        "menge": null,
-        "einheit": "unbekannt",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
         "einzelpreis": 2.49,
-        "inhalt_menge": null,
-        "inhalt_einheit": "unbekannt",
+        "inhalt_menge": 450.0,
+        "inhalt_einheit": "G",
         "haendler": "Rewe",
         "datum": "2026-04-25",
         "kalenderwoche": 17,
         "monat": 4,
-        "vollstaendig": false,
+        "vollstaendig": true,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": []
     },
     {
         "produkt": "GER. KAESE A. RI",
         "produkt_original": "GER. KAESE A. RI",
         "produkt_standard": "Geriebener Käse",
-        "bio": "unbekannt",
+        "bio": "ja",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -244,13 +308,20 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "PRESSEERZEUGNIS",
         "produkt_original": "PRESSEERZEUGNIS",
         "produkt_standard": "Buch/Zeitschrift",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -263,7 +334,14 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:05",
-        "bon_id": "Rewe-2026-04-25-19:05-8962"
+        "bon_id": "Rewe-2026-04-25-19:05-8962",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "Test",
@@ -280,7 +358,11 @@
         "datum": "2027-01-01",
         "kalenderwoche": 53,
         "monat": 1,
-        "vollstaendig": false
+        "vollstaendig": false,
+        "fehlende_felder": [
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "Test",
@@ -297,14 +379,18 @@
         "datum": "2027-01-01",
         "kalenderwoche": 53,
         "monat": 1,
-        "vollstaendig": false
+        "vollstaendig": false,
+        "fehlende_felder": [
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     },
     {
         "produkt": "WASSERMELO. MINI",
         "produkt_original": "WASSERMELO. MINI",
         "produkt_standard": "Wassermelone",
-        "bio": "unbekannt",
-        "kategorie": "unbekannt",
+        "bio": "nein",
+        "kategorie": "Obst",
         "menge": 2.153,
         "einheit": "kg",
         "einzelpreis": 2.79,
@@ -314,18 +400,19 @@
         "datum": "2026-04-11",
         "kalenderwoche": 15,
         "monat": 4,
-        "vollstaendig": false,
+        "vollstaendig": true,
         "zeit": "19:58",
-        "bon_id": "Rewe-2026-04-11-19:58-1556"
+        "bon_id": "Rewe-2026-04-11-19:58-1556",
+        "fehlende_felder": []
     },
     {
         "produkt": "TORTILLAS SALZ",
         "produkt_original": "TORTILLAS SALZ",
         "produkt_standard": "Tortillachips",
-        "bio": "unbekannt",
-        "kategorie": "unbekannt",
-        "menge": null,
-        "einheit": "unbekannt",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
         "einzelpreis": 1.49,
         "inhalt_menge": 500.0,
         "inhalt_einheit": "G",
@@ -333,15 +420,16 @@
         "datum": "2026-04-11",
         "kalenderwoche": 15,
         "monat": 4,
-        "vollstaendig": false,
+        "vollstaendig": true,
         "zeit": "19:58",
-        "bon_id": "Rewe-2026-04-11-19:58-1556"
+        "bon_id": "Rewe-2026-04-11-19:58-1556",
+        "fehlende_felder": []
     },
     {
         "produkt": "HANSE PORTER",
         "produkt_original": "HANSE PORTER",
         "produkt_standard": "Hanse Porter",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "Alkohol",
         "menge": null,
         "einheit": "unbekannt",
@@ -354,13 +442,17 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:58",
-        "bon_id": "Rewe-2026-04-11-19:58-1556"
+        "bon_id": "Rewe-2026-04-11-19:58-1556",
+        "fehlende_felder": [
+            "menge",
+            "einheit"
+        ]
     },
     {
         "produkt": "LS AUTH. RED",
         "produkt_original": "LS AUTH. RED",
         "produkt_standard": "Lucky Strike Red",
-        "bio": "unbekannt",
+        "bio": "nein",
         "kategorie": "unbekannt",
         "menge": null,
         "einheit": "unbekannt",
@@ -373,6 +465,13 @@
         "monat": 4,
         "vollstaendig": false,
         "zeit": "19:58",
-        "bon_id": "Rewe-2026-04-11-19:58-1556"
+        "bon_id": "Rewe-2026-04-11-19:58-1556",
+        "fehlende_felder": [
+            "kategorie",
+            "menge",
+            "einheit",
+            "inhalt_menge",
+            "inhalt_einheit"
+        ]
     }
 ]

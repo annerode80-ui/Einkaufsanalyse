@@ -38,13 +38,15 @@
         "Flasche",
         "Glas",
         "Kg",
-        "Sonstiges"
+        "Sonstiges",
+        "Gr"
     ],
     "KATEGORIE_ZUORDNUNG": {
         "Obst": [
             "APFEL",
             "BANANE",
-            "BIRNE GRUEN"
+            "BIRNE GRUEN",
+            "WASSERMELO. MINI"
         ],
         "Gemüse": [],
         "Fleisch/Wurst/Eier": [
@@ -56,7 +58,8 @@
         "Käse": [
             "TILSITER SCHEIB.",
             "BIO EMMENTALER",
-            "PARM. REGG. STK."
+            "PARM. REGG. STK.",
+            "BIO MOZZARELLA"
         ],
         "Convenience": [
             "BACKCAMEMBERT"
@@ -90,6 +93,12 @@
         ],
         "Backwaren": [
             "LAUGENSTANGEN"
+        ],
+        "Snacks": [
+            "TORTILLAS SALZ"
+        ],
+        "Fisch": [
+            "SCHLEMMERFILET"
         ]
     }
 }

@@ -6,5 +6,9 @@
     "HANSE PORTER": {
         "inhalt_menge": 500.0,
         "inhalt_einheit": "Ml"
+    },
+    "BIO MOZZARELLA": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "G"
     }
 }

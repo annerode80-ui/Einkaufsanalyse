@@ -437,8 +437,12 @@ def rewe_pdf_import(dateiname, mapping, inhalte):
 
 def vollstaendigkeit_pruefen(artikel):
     relevante_felder = ["produkt", "produkt_standard", "bio", "kategorie", "menge", "einheit", "inhalt_menge", "inhalt_einheit", "einzelpreis", "haendler", "datum"]
-
-    artikel["vollstaendig"] = all(artikel.get(feld) not in [None, "", "unbekannt"] for feld in relevante_felder)
+    fehlende_felder = []
+    for feld in relevante_felder:
+        if artikel.get(feld) in [None, "", "unbekannt"]:
+            fehlende_felder.append(feld)
+    artikel["fehlende_felder"] = fehlende_felder
+    artikel["vollstaendig"] = len(fehlende_felder) == 0
     return artikel
 
 
@@ -450,7 +454,83 @@ def unvollstaendige_artikel_sammeln(einkaeufe):
             unvollstaendige.append(artikel)
     return unvollstaendige
 
-                
+
+def artikel_mit_fehlendem_feld_finden(einkaeufe, feldname):
+    treffer = []
+    for artikel in einkaeufe:
+        vollstaendigkeit_pruefen(artikel)
+        if feldname in artikel.get('fehlende_felder', []):
+            treffer.append(artikel)
+    return treffer
+
+
+def feld_mehrfach_setzen(artikel_liste, feldname, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+    while True:
+        for i, artikel in enumerate(artikel_liste, start=1):
+            print(f"{i} = {artikel['datum']} | "
+                  f"{artikel['produkt']} | "
+                  f"aktuell: {artikel.get(feldname)}")    
+        print("x = zurück")
+        try:
+            eingabe = (input('Welche Nummern ändern? z.B. 1, 4, 8: ')).strip().lower()
+            if eingabe == 'x':
+                return artikel_liste, kategorie_zuordnung
+            indices = []
+            teile = eingabe.split(',')
+            for teil in teile:    
+                indices.append(int(teil.strip()))
+            print(f'\n{feldname}')
+            wert = wert_fuer_feld_abfragen(feldname, kategorien_liste, einheiten_liste, haendler_liste)
+            if wert is None:
+                return artikel_liste, kategorie_zuordnung
+            for i in indices:
+                if 1<= i <= len(artikel_liste):
+                    artikel = artikel_liste[i-1]
+                    artikel[feldname]= wert
+                    if feldname == 'kategorie':
+                        kategorie_zuordnung = kategorie_zuordnung_lernen(artikel['produkt'], wert, kategorie_zuordnung)
+                    vollstaendigkeit_pruefen(artikel)
+                else:
+                    print(f'{i} ist keine gültige Nummer.')
+                    continue
+            return artikel_liste, kategorie_zuordnung
+        except ValueError:
+            print('Bitte eine Zahl eingeben oder x zum Zurückgehen.')
+
+
+def wert_fuer_feld_abfragen(feldname, kategorien_liste, einheiten_liste, haendler_liste):
+    if feldname == 'bio':
+        while True:
+            bio = eingabe_mit_abbruch('Bio')
+            if bio is None:
+                return None
+            bio = bio.lower()
+            if bio in ['ja', 'nein']:
+                return bio
+            else:
+                print("Bitte 'ja' oder 'nein' eingeben.")
+    elif feldname == 'kategorie':
+        kategorie = auswahl_aus_liste( "Kategorie auswählen:", kategorien_liste, stammdaten, "KATEGORIEN", stammdaten_datei)
+        if kategorie is None:
+            return None
+        return kategorie
+    elif feldname in ['menge', 'inhalt_menge']:
+        menge = zahl_eingeben('Menge')
+        if menge is None:
+            return None
+        return menge
+    elif feldname in ['einheit', 'inhalt_einheit']:
+        einheit = auswahl_aus_liste( "Einheit auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
+        if einheit is None:
+            return None
+        return einheit
+    elif feldname == 'haendler':
+        haendler = auswahl_aus_liste("Händler auswählen:", haendler_liste, stammdaten, "HAENDLER", stammdaten_datei)
+        if haendler is None:
+            return None
+        return haendler
+
+
 def auswahl_aus_liste(titel, optionen, stammdaten, schluessel, stammdaten_datei):
     while True:
         print(f'\n{titel}')
@@ -605,22 +685,22 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
     return einkaeufe, kategorie_zuordnung, mapping, inhalte
 
 
-def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
-        return einkaeufe, kategorie_zuordnung
+        return einkaeufe, kategorie_zuordnung, mapping, inhalte
     eintraege_unvollstaendig = unvollstaendige_artikel_sammeln(einkaeufe)
     if not eintraege_unvollstaendig:
         print("Keine unvollständigen Einträge vorhanden.")
-        return einkaeufe, kategorie_zuordnung
+        return einkaeufe, kategorie_zuordnung, mapping, inhalte
     for i, artikel in enumerate(eintraege_unvollstaendig, start=1):
-        print(f"{i}: {artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['inhalt_menge']} {artikel['inhalt_einheit']} | {artikel['haendler']}")
+        print(f"{i}:{artikel['datum']} | {artikel['produkt']} | {', '.join(artikel['fehlende_felder'])}")
         print("-" * 100)
     while True:
         try:
             auswahl = eingabe_mit_abbruch('Nummer des Eintrags: ')
             if auswahl is None:
-                return einkaeufe, kategorie_zuordnung
+                return einkaeufe, kategorie_zuordnung, mapping, inhalte
             auswahl = int(auswahl)
             if 1 <= auswahl <= len(eintraege_unvollstaendig):
                 index = auswahl - 1
@@ -628,7 +708,7 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
                 if 'produkt_original' not in eintrag_auswahl:
                     eintrag_auswahl['produkt_original'] = eintrag_auswahl['produkt']
                 if 'produkt_standard' not in eintrag_auswahl:
-                    eintrag_auswahl['produkt_standard'] = eintrag_auswahl['produkt']
+                    eintrag_auswahl['produkt_standard'] = produkt_standard_bestimmen(eintrag_auswahl['produkt'], mapping)
                 if 'inhalt_menge' not in eintrag_auswahl:
                     eintrag_auswahl['inhalt_menge'] = None
                 if 'inhalt_einheit' not in eintrag_auswahl:
@@ -663,22 +743,23 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
                         continue
                     eintrag_auswahl['einheit'] = einheit
                 if eintrag_auswahl['inhalt_menge'] == None:
-                    inhalt_menge = zahl_eingeben('Menge')
+                    inhalt_menge = zahl_eingeben('Menge in der Verpackung')
                     if inhalt_menge is None:
                         continue
                     eintrag_auswahl['inhalt_menge'] = inhalt_menge
                 if eintrag_auswahl['inhalt_einheit'] == 'unbekannt':
-                    inhalt_einheit = auswahl_aus_liste( "Einheit auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
+                    inhalt_einheit = auswahl_aus_liste( "Verpackungseinheit auswählen:", einheiten_liste, stammdaten, "EINHEITEN", stammdaten_datei)
                     if inhalt_einheit is None:
                         continue
-                    eintrag_auswahl['inhalt_einheit'] = inhalt_einheit 
+                    eintrag_auswahl['inhalt_einheit'] = inhalt_einheit
+                inhalte[eintrag_auswahl['produkt_original']] = {'inhalt_menge': eintrag_auswahl['inhalt_menge'], 'inhalt_einheit': eintrag_auswahl['inhalt_einheit']}
                 vollstaendigkeit_pruefen(eintrag_auswahl)
-                return einkaeufe, kategorie_zuordnung
+                return einkaeufe, kategorie_zuordnung, mapping, inhalte
             else:
                 print(f"Bitte Zahl zwischen 1 und {len(eintraege_unvollstaendig)} eingeben.")
         except ValueError:
             print("Bitte eine Zahl eingeben.")
-    return einkaeufe, kategorie_zuordnung
+    return einkaeufe, kategorie_zuordnung, mapping, inhalte
     
 
 def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
@@ -834,7 +915,7 @@ def alle_einkaeufe_anzeigen(einkaeufe):
     print('Alle vollständigen Einträge\n')
     for artikel in sorted(einkaeufe, key=lambda x: x['datum']):
         if artikel['vollstaendig']:
-            print(f"{artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['haendler']}")
+            print(f"{artikel['datum']} | {artikel['produkt']} | {artikel['produkt_standard']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['inhalt_menge']} {artikel['inhalt_einheit']} | {artikel['haendler']}")
             print("-" * 100 + '\n')
     print('Alle unvollständigen Einträge\n')
     for artikel in sorted(einkaeufe, key=lambda x: x['datum']):
@@ -853,7 +934,7 @@ def unvollstaendige_einkaeufe_anzeigen(einkaeufe):
         return
     print("Folgende Einträge sind unvollständig und müssen bearbeitet werden:\n")
     for artikel in unvollstaendige:
-        print(f"{artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} €| {artikel['inhalt_menge']} {artikel['inhalt_einheit']}  | {artikel['haendler']} | {artikel['vollstaendig']}")
+        print(f"{artikel['datum']} | {artikel['produkt']} | {', '.join(artikel['fehlende_felder'])}")
         print("-" * 100)
                                 
 
@@ -1011,14 +1092,15 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             print('Fehlerhafte Eingabe.')
             
             
-def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung):
+def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
     while True:
         print('\n' + '=' * 50)
         print('Einträge bearbeiten')
         print('=' * 50)
         print('1 = Eintrag bearbeiten')
         print('2 = unvollständigen Eintrag vervollständigen')
-        print('3 = Eintrag löschen')
+        print('3 = Feld mehrfach setzen')
+        print('4 = Eintrag löschen')
         print('9 = zurück zum Hauptmenü')
         
         wahl = input('Menü-Auswahl: ').strip()
@@ -1027,14 +1109,30 @@ def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, ha
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '2':
-            einkaeufe, kategorie_zuordnung = eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
+            einkaeufe, kategorie_zuordnung, mapping, inhalte = eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '3':
+            unvollstaendige_einkaeufe_anzeigen(einkaeufe)
+            feldname = eingabe_mit_abbruch ("Welches Feld bearbeiten?")
+            if feldname is None:
+                continue
+            artikel_liste = artikel_mit_fehlendem_feld_finden (einkaeufe, feldname)
+            if not artikel_liste:
+                print("Keine passenden Artikel gefunden.")
+                continue
+            artikel_liste, kategorie_zuordnung = feld_mehrfach_setzen(artikel_liste, feldname, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
+            stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
+            daten_speichern(dateiname, einkaeufe)
+        elif wahl == '4':
             einkaeufe = eintrag_loeschen(einkaeufe)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '9':
-            return einkaeufe, kategorie_zuordnung
+            return einkaeufe, kategorie_zuordnung, mapping, inhalte
         else:
             print('Fehlerhafte Eingabe.')
     
