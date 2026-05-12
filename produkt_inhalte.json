@@ -4,11 +4,127 @@
         "inhalt_einheit": "G"
     },
     "HANSE PORTER": {
-        "inhalt_menge": 500.0,
-        "inhalt_einheit": "Ml"
+        "inhalt_menge": 6,
+        "inhalt_einheit": "Flasche"
     },
     "BIO MOZZARELLA": {
         "inhalt_menge": 150.0,
         "inhalt_einheit": "G"
+    },
+    "GEFL. SALAMI": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "KASSELER": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "HAEHN.BRUSTFILET": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "TILSITER SCHEIB.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO EMMENTALER": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "PARM. REGG. STK.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BACKCAMEMBERT": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "KART.MEHLIGKOCH.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Beutel"
+    },
+    "ZWIEBEL ROT BIO": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Beutel"
+    },
+    "KOHLRABI": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO EIER OKT": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "STREICHGUT": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "MW BIO JOGH.3,8%": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Glas"
+    },
+    "JOG STRACCIATELL": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Glas"
+    },
+    "BIO WEIZENMEHL": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO ROGGENVKMEHL": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO BACKHEFE": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "WAESCHEKLAMMERN": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO RAEUCHERLACH": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "G"
+    },
+    "SAHNEMEERRETTICH": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "G"
+    },
+    "APFELMARK": {
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "G"
+    },
+    "LS AUTH. RED": {
+        "inhalt_menge": 22.0,
+        "inhalt_einheit": "Stück"
+    },
+    "WASSERMELO. MINI": {
+        "inhalt_menge": 2.153,
+        "inhalt_einheit": "kg"
+    },
+    "CIABATTA": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "WELTM.CHIABROET.": {
+        "inhalt_menge": 40.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO NO MILK": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO JOGH. HIMB.": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "LAUGENSTANGEN": {
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    },
+    "GURKE BIO": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
     }
 }

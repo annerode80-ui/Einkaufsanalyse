@@ -19,7 +19,9 @@
         "Hygieneartikel",
         "Wäschepflege",
         "Sonstiges",
-        "Test"
+        "Test",
+        "Saucen",
+        "Rauchwaren"
     ],
     "HAENDLER": [
         "Rewe",
@@ -37,9 +39,14 @@
         "Packung",
         "Flasche",
         "Glas",
-        "Kg",
+        "kg",
+        "g",
+        "ml",
+        "l",
         "Sonstiges",
-        "Gr"
+        "Träger",
+        "Beutel",
+        "Tube"
     ],
     "KATEGORIE_ZUORDNUNG": {
         "Obst": [
@@ -67,12 +74,15 @@
         "Gemüse": [
             "KART.MEHLIGKOCH.",
             "ZWIEBEL ROT BIO",
-            "KOHLRABI"
+            "KOHLRABI",
+            "GURKE BIO"
         ],
         "Milch(ersatz)-Produkte": [
             "STREICHGUT",
             "JOG STRACCIATELL",
-            "MW BIO JOGH.3,8%"
+            "MW BIO JOGH.3,8%",
+            "BIO NO MILK",
+            "BIO JOGH. HIMB."
         ],
         "Wäschepflege": [
             "WAESCHEKLAMMERN"
@@ -92,13 +102,22 @@
             "TEST-KURZ"
         ],
         "Backwaren": [
-            "LAUGENSTANGEN"
+            "LAUGENSTANGEN",
+            "CIABATTA",
+            "WELTM.CHIABROET."
         ],
         "Snacks": [
             "TORTILLAS SALZ"
         ],
         "Fisch": [
-            "SCHLEMMERFILET"
+            "SCHLEMMERFILET",
+            "BIO RAEUCHERLACH"
+        ],
+        "Saucen": [
+            "SAHNEMEERRETTICH"
+        ],
+        "Rauchwaren": [
+            "LS AUTH. RED"
         ]
     }
 }

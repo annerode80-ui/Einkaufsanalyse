@@ -1,0 +1,299 @@
+{
+    "GEFL. SALAMI": {
+        "produkt_standard": "Geflügelsalami",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 80,
+        "inhalt_einheit": "g"
+    },
+    "KASSELER": {
+        "produkt_standard": "Kasseler-Aufschnitt",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "g"
+    },
+    "HAEHN.BRUSTFILET": {
+        "produkt_standard": "Hähnchenbrustfilet",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "g"
+    },
+    "TILSITER SCHEIB.": {
+        "produkt_standard": "Tilsiter",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO EMMENTALER": {
+        "produkt_standard": "Emmentaler",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150,
+        "inhalt_einheit": "g"
+    },
+    "PARM. REGG. STK.": {
+        "produkt_standard": "Parmesan",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 150,
+        "inhalt_einheit": "g"
+    },
+    "BACKCAMEMBERT": {
+        "produkt_standard": "Back-Camembert",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 4,
+        "inhalt_einheit": "Stück"
+    },
+    "BANANE BIO": {
+        "produkt_standard": "Banane",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.089,
+        "einheit": "kg",
+        "inhalt_menge": 1.089,
+        "inhalt_einheit": "kg"
+    },
+    "BIRNE GRUEN": {
+        "produkt_standard": "Birne",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 0.823,
+        "einheit": "kg",
+        "inhalt_menge": 0.823,
+        "inhalt_einheit": "kg"
+    },
+    "KART.MEHLIGKOCH.": {
+        "produkt_standard": "Kartoffeln",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 2.5,
+        "inhalt_einheit": "kg"
+    },
+    "ZWIEBEL ROT BIO": {
+        "produkt_standard": "Rote Zwiebeln",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 500,
+        "inhalt_einheit": "g"
+    },
+    "KOHLRABI": {
+        "produkt_standard": "Kohlrabi",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO EIER OKT": {
+        "produkt_standard": "Eier",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 10,
+        "inhalt_einheit": "Stück"
+    },
+    "STREICHGUT": {
+        "produkt_standard": "Streichfett",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "MW BIO JOGH.3,8%": {
+        "produkt_standard": "Joghurt Natur",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 2.0,
+        "einheit": "Stk",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Glas"
+    },
+    "JOG STRACCIATELL": {
+        "produkt_standard": "Joghurt Stracciatella",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Glas"
+    },
+    "BIO WEIZENMEHL": {
+        "produkt_standard": "Weizenmehl",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "BIO ROGGENVKMEHL": {
+        "produkt_standard": "Roggenvollkornmehl",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "BIO BACKHEFE": {
+        "produkt_standard": "Backhefe",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "HANSE PORTER": {
+        "produkt_standard": "Hanse Porter",
+        "bio": "nein",
+        "kategorie": "Alkohol",
+        "menge": 1.0,
+        "einheit": "Träger",
+        "inhalt_menge": 6,
+        "inhalt_einheit": "Flasche"
+    },
+    "WAESCHEKLAMMERN": {
+        "produkt_standard": "Wäscheklammern",
+        "bio": "nein",
+        "kategorie": "Wäschepflege",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 24,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO RAEUCHERLACH": {
+        "produkt_standard": "Räucherlachs",
+        "bio": "ja",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "G"
+    },
+    "SAHNEMEERRETTICH": {
+        "produkt_standard": "Meerrettich",
+        "bio": "nein",
+        "kategorie": "Saucen",
+        "menge": 1.0,
+        "einheit": "Tube",
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "G"
+    },
+    "APFELMARK": {
+        "produkt_standard": "Apfelmark",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "G"
+    },
+    "WASSERMELO. MINI": {
+        "produkt_standard": "Wassermelone",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 1.714,
+        "einheit": "kg",
+        "inhalt_menge": 1.714,
+        "inhalt_einheit": "kg"
+    },
+    "TORTILLAS SALZ": {
+        "produkt_standard": "Tortillachips",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "G"
+    },
+    "LS AUTH. RED": {
+        "produkt_standard": "Lucky Strike Red",
+        "bio": "nein",
+        "kategorie": "Rauchwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 22.0,
+        "inhalt_einheit": "Stück"
+    },
+    "CIABATTA": {
+        "produkt_standard": "Ciabatta",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "WELTM.CHIABROET.": {
+        "produkt_standard": "Weltmeister-Brötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 40.0,
+        "inhalt_einheit": "g"
+    },
+    "GURKE BIO": {
+        "produkt_standard": "Gurke",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO NO MILK": {
+        "produkt_standard": "Haferdrink",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 4.0,
+        "einheit": "Stk",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO JOGH. HIMB.": {
+        "produkt_standard": "Joghurt Himbeere",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "LAUGENSTANGEN": {
+        "produkt_standard": "Laugenstangen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    }
+}
