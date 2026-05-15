@@ -42,9 +42,13 @@ vollstaendig:
 """
 
 import json
-from datetime import datetime
 import re
+import unicodedata
+import pytesseract
+from datetime import datetime
 from pypdf import PdfReader
+from PIL import Image
+
 
 """
 Lädt alle Einkäufe aus einer JSON-Datei.
@@ -122,6 +126,12 @@ def stammdaten_laden(dateiname):
     try:
         with open(dateiname, "r", encoding="utf-8") as datei:
             stammdaten = json.load(datei)
+            stammdaten['EINHEITEN'] = [text_normalisieren(wert)
+            for wert in stammdaten['EINHEITEN']]
+            stammdaten['KATEGORIEN'] = [text_normalisieren(wert)
+            for wert in stammdaten['KATEGORIEN']]
+            stammdaten['HAENDLER'] = [text_normalisieren(wert)
+            for wert in stammdaten['HAENDLER']]
             return stammdaten
     except FileNotFoundError:
         print("Stammdaten-Datei nicht gefunden.")
@@ -184,6 +194,7 @@ def produkt_stammdaten_aus_vollstaendigen_artikeln_lernen(einkaeufe, produkt_sta
             gelernt += 1
     print(f'Es wurden {gelernt} Artikel in die Produkt-Stammdaten aufgenommen.')
     return produkt_stammdaten
+
 
 def produkt_stammdaten_anwenden(artikel, produkt_stammdaten):
     produkt_original = artikel.get('produkt_original')
@@ -281,6 +292,7 @@ def produkt_inhalte_ergaenzen(artikel_liste, inhalte, einheiten_liste):
             ).strip()
             if menge_text == '':
                 bearbeitet.add(artikel['produkt_original'])
+                continue
             try:
                 menge = float(menge_text.replace(',', '.'))
             except ValueError:
@@ -293,7 +305,7 @@ def produkt_inhalte_ergaenzen(artikel_liste, inhalte, einheiten_liste):
                   stammdaten,
                   "EINHEITEN",
                   stammdaten_datei)
-            if einheit == '':
+            if einheit is None:
                 bearbeitet.add(artikel['produkt_original'])
                 continue
 
@@ -311,6 +323,12 @@ def produkt_inhalte_speichern(produkt_inhalte_datei, inhalte):
         json.dump(inhalte, datei, ensure_ascii=False, indent=4)
 
 
+def text_normalisieren(text):
+    if isinstance(text, str):
+        return unicodedata.normalize("NFC", text).strip()
+    return text
+
+
 def vergleichspreis_berechnen(artikel):
     preis = artikel['einzelpreis']
     menge = artikel['inhalt_menge']
@@ -318,22 +336,22 @@ def vergleichspreis_berechnen(artikel):
     vergleichspreis = 0
     vergleichsmenge = 'unbekannt'
 
-    if einheit == 'G':
+    if einheit == 'g':
         vergleichspreis = float(preis/menge*1000)
-        vergleichsmenge = 'Kg'
+        vergleichsmenge = 'kg'
         print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
         return vergleichspreis, vergleichsmenge
-    elif einheit == 'Ml':
+    elif einheit == 'ml':
         vergleichspreis = float(preis/menge*1000)
-        vergleichsmenge = 'L'
+        vergleichsmenge = 'l'
         print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
         return vergleichspreis, vergleichsmenge
-    elif einheit == 'Kg':
+    elif einheit == 'kg':
         vergleichspreis = float(preis/menge)
         vergleichsmenge = einheit
         print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
         return vergleichspreis, vergleichsmenge
-    elif einheit == 'L':
+    elif einheit == 'l':
         vergleichspreis = float(preis/menge)
         vergleichsmenge = einheit
         print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
@@ -365,8 +383,15 @@ def pdf_text_auslesen(dateiname):
 
     return text
 
+
+def bild_text_auslesen(dateiname):
+    bild = Image.open('/Users/Anne/Downloads/PNG-Bild-4538-B071-AD-0.png')
+    text = pytesseract.image_to_string(bild, lang='deu')
+    print(text)
+    return text
+
 """Erzeugt aus dem PDF-Import eines Rewe-Kassenbons die Artikelliste"""
-def rewe_text_zu_artikeln(text, mapping, inhalte):
+def rewe_artikel_aus_text(text, mapping, inhalte):
     artikel_liste = []
     zeilen = text.splitlines()
     ignorieren = ['LEERG', 'EURO', 'EUR', 'SUMME', 'A=', 'B=', 'GESAMTBETRAG', 'STEUER', 'NETTO', 'BRUTTO', 'KUNDENBELEG', 'DATUM:', 'UHRZEIT:', 'BELEG-NR', 'TRACE-NR', 'BEZAHLUNG', 'CONTACTLESS', 'VISA', 'NR.', 'VU-NR', 'TERMINAL-ID', 'POS-INFO', 'AS-ZEIT', 'AS-PROC-CODE', 'CAPT.-REF', 'APPROVED', 'ZAHLUNG ERFOLGT', 'BETRAG']
@@ -399,10 +424,10 @@ def rewe_text_zu_artikeln(text, mapping, inhalte):
                 try:
                     menge = float(teile[0].replace(',' , '.'))
                     einzelpreis = float(teile[-1].replace(',' , '.'))
-                    einheit = str(teile[1]).strip()
+#                    einheit = str(teile[1]).strip()
 
                     letzter_artikel['menge'] = menge
-                    letzter_artikel['einheit'] = einheit
+#                    letzter_artikel['einheit'] = einheit
                     letzter_artikel['einzelpreis'] = einzelpreis
                 except (ValueError, IndexError):
                     pass
@@ -451,7 +476,7 @@ def rewe_text_zu_artikeln(text, mapping, inhalte):
         kategorie = kategorie_vorschlagen(produkt, kategorie_zuordnung)
         
         artikel = {"produkt": produkt, "produkt_original": produkt, "produkt_standard": produkt_standard_bestimmen(produkt, mapping), "bio": bio, "kategorie": kategorie, "menge": None, "einheit": 'unbekannt', "einzelpreis": preis, "inhalt_menge": inhalt['inhalt_menge'],
-"inhalt_einheit": inhalt['inhalt_einheit'], "haendler": 'Rewe', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
+"inhalt_einheit": inhalt['inhalt_einheit'], "haendler": 'unbekannt', "datum": None, "kalenderwoche": None, "monat": None, "vollstaendig": False}
         artikel_liste.append(artikel)
         letzter_artikel = artikel
     return artikel_liste, mapping, inhalte
@@ -519,7 +544,24 @@ def rewe_bonnummer_aus_text(text):
 
 def rewe_pdf_import(dateiname, mapping, inhalte):
     text = pdf_text_auslesen(dateiname)
-    artikel_liste, mapping, inhalte = rewe_text_zu_artikeln(text, mapping, inhalte)
+    artikel_liste, mapping, inhalte = rewe_artikel_aus_text(text, mapping, inhalte)
+    datum, zeit, kw, monat = rewe_datum_aus_text(text)
+    bonnummer = rewe_bonnummer_aus_text(text)
+    bon_id = f'Rewe-{datum}-{zeit}-{bonnummer}'
+
+    for artikel in artikel_liste:
+        artikel['datum'] = datum
+        artikel['zeit'] = zeit
+        artikel['kalenderwoche'] = kw
+        artikel['monat'] = monat
+        artikel['bon_id'] = bon_id
+        vollstaendigkeit_pruefen(artikel)
+    return artikel_liste, mapping, inhalte
+
+
+def lidl_png_import(dateiname, mapping, inhalte):
+    text = pdf_text_auslesen(dateiname)
+    artikel_liste, mapping, inhalte = rewe_artikel_aus_text(text, mapping, inhalte)
     datum, zeit, kw, monat = rewe_datum_aus_text(text)
     bonnummer = rewe_bonnummer_aus_text(text)
     bon_id = f'Rewe-{datum}-{zeit}-{bonnummer}'
@@ -911,14 +953,13 @@ def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_li
                             wert = input(f'Soll {produkt} auch der Standardname sein? ja/nein: ').strip().lower()
                             if wert == 'ja':
                                 eintrag_auswahl['produkt_standard'] = produkt
+                                mapping[eintrag_auswahl['produkt_original']] = produkt
                                 break
                             elif wert == 'nein':
                                 break
                             else:
                                 print("Bitte ja oder nein eingeben.")
                         eintrag_auswahl['produkt'] = produkt
-                        eintrag_auswahl['produkt_original'] = produkt
-                        mapping[eintrag_auswahl['produkt_original']] = produkt
                         vollstaendigkeit_pruefen(eintrag_auswahl)
                     elif wahl == '2':
                         while True:
@@ -1039,7 +1080,16 @@ def eintrag_loeschen(einkaeufe):
         except ValueError:
             print("Bitte eine Zahl eingeben.")
     return einkaeufe
-    
+
+
+def produkt_uebersicht(produkt_stammdaten):
+    if not produkt_stammdaten:
+        print('Keine Produkt-Stammdaten vorhanden.')
+        return
+    for produkt_original, daten in sorted(produkt_stammdaten.items(), key=lambda eintrag: eintrag[1]['produkt_standard']):
+        print(f" {daten['produkt_standard']} | {daten['bio']} | {daten['kategorie']} | {daten['einheit']} | {daten['inhalt_menge']} {daten['inhalt_einheit']} ")
+        print("-" * 80)
+
 
 def alle_einkaeufe_anzeigen(einkaeufe):
     if not einkaeufe:
@@ -1077,6 +1127,40 @@ def unvollstaendige_einkaeufe_anzeigen(einkaeufe):
         print("-" * 100)
                                 
 
+def einkaufsstatistik(einkaeufe):
+    if not einkaeufe:
+        print('Keine Einkäufe vorhanden.')
+        return
+    bon_daten = {}
+    artikel_anzahl = 0
+    for artikel in einkaeufe:
+        if artikel['vollstaendig']:
+            bon_id = artikel['bon_id']
+            kosten = artikel['einzelpreis']
+            artikel_anzahl = 0 
+            if bon_id in bon_daten:
+                bon_daten[bon_id]['kosten'] += kosten
+                bon_daten[bon_id]['artikel_anzahl'] += 1
+            else:
+                bon_daten[bon_id] = {'kosten':kosten, 'artikel_anzahl': 1}
+                
+    gesamt = sum(daten["kosten"] for daten in bon_daten.values())
+    gesamt_artikel = sum(daten["artikel_anzahl"] for daten in bon_daten.values())
+    anzahl_einkaeufe = len(bon_daten)
+    print(f"Anzahl Einkäufe: {anzahl_einkaeufe}")
+    print("-" * 30)
+    print(f"Gesamtausgaben: {gesamt}")
+    print("-" * 30)
+    print(f"Durchschnittlicher Einkaufswert: {gesamt/anzahl_einkaeufe:.2f}")
+    print("-" * 30)
+    print(f"Durchschnittlicher Artikel-Anzahl: {gesamt_artikel/anzahl_einkaeufe:.2f}")
+    print("-" * 30)
+    for bon_id, daten in sorted(bon_daten.items()):
+        anteil = daten['kosten']/gesamt*100
+        print(f"{bon_id} | {daten['artikel_anzahl']} | {daten['kosten']:.2f} € | {anteil:.2f} %")
+        print("-" * 50)
+
+
 def kategorie_uebersicht(einkaeufe):
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
@@ -1085,35 +1169,35 @@ def kategorie_uebersicht(einkaeufe):
     for artikel in einkaeufe:
         if artikel['vollstaendig']:
             kategorie = artikel['kategorie']
-            menge = artikel['menge']
-            kosten = menge * artikel['einzelpreis']
+            kosten = artikel['einzelpreis']
             if kategorie in kategorie_daten:
                 kategorie_daten[kategorie] += kosten
             else:
                 kategorie_daten[kategorie] = kosten
-    for kategorie, kosten in sorted(kategorie_daten.items()):
-        print(f"{kategorie} | {kosten:.2f} € ")
+    gesamt = sum(kategorie_daten.values())
+    for kategorie, kosten in sorted(kategorie_daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
+        anteil = kosten/gesamt*100
+        print(f"{kategorie} | {kosten:.2f} € | {anteil:.2f} %")
         print("-" * 40)
 
         
-def produkt_uebersicht(einkaeufe):
+def haendler_uebersicht(einkaeufe):
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
         return
-    produkt_daten = {}
+    haendler_daten = {}
     for artikel in einkaeufe:
         if artikel['vollstaendig']:
-            produkt = artikel['produkt']
-            menge = artikel['menge']
-            einheit = artikel['einheit']
-            kosten = menge * artikel['einzelpreis']
-            if produkt in produkt_daten:
-                produkt_daten[produkt]['menge'] += menge
-                produkt_daten[produkt]['kosten'] += kosten
+            haendler = artikel['haendler']
+            kosten = artikel['einzelpreis']
+            if haendler in haendler_daten:
+                haendler_daten[haendler] += kosten
             else:
-                produkt_daten[produkt] = {'menge': menge, 'einheit': einheit, 'kosten': kosten}
-    for produkt, daten in sorted(produkt_daten.items()):
-        print(f"{produkt} | {daten['menge']} {daten['einheit']} | {daten['kosten']:.2f} € ")
+                haendler_daten[haendler] = kosten
+    gesamt = sum(haendler_daten.values())
+    for haendler, kosten in sorted(haendler_daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
+        anteil = kosten/gesamt*100
+        print(f"{haendler} | {kosten:.2f} €  | {anteil:.2f} %")
         print("-" * 40)
 
 
@@ -1125,8 +1209,7 @@ def monat_uebersicht(einkaeufe):
     for artikel in einkaeufe:
         if artikel['vollstaendig']:
             monat = artikel['monat']
-            menge = artikel['menge']
-            kosten = menge * artikel['einzelpreis']
+            kosten = artikel['einzelpreis']
             if monat in monat_daten:
                 monat_daten[monat] += kosten
             else:
@@ -1134,8 +1217,10 @@ def monat_uebersicht(einkaeufe):
     if not monat_daten:
         print("Keine vollständigen Einträge für die Monatsübersicht vorhanden.")
         return
+    gesamt = sum(monat_daten.values())
     for monat, kosten in sorted(monat_daten.items()):
-        print(f"Monat {monat} | {kosten:.2f} € ")
+        anteil = kosten/gesamt*100
+        print(f"Monat {monat} | {kosten:.2f} € | {anteil:.2f} %")
         print("-" * 40)
 
 
@@ -1147,8 +1232,7 @@ def woche_uebersicht(einkaeufe):
     for artikel in einkaeufe:
         if artikel['vollstaendig']:
             woche = artikel['kalenderwoche']
-            menge = artikel['menge']
-            kosten = menge * artikel['einzelpreis']
+            kosten = artikel['einzelpreis']
             if woche in woche_daten:
                 woche_daten[woche] += kosten
             else:
@@ -1156,8 +1240,10 @@ def woche_uebersicht(einkaeufe):
     if not woche_daten:
         print("Keine vollständigen Einträge für die Wochenübersicht vorhanden.")
         return
+    gesamt = sum(woche_daten.values())
     for woche, kosten in sorted(woche_daten.items()):
-        print(f"Kalenderwoche {woche} | {kosten:.2f} € ")
+        anteil = kosten/gesamt*100
+        print(f"Kalenderwoche {woche} | {kosten:.2f} € | {anteil:.2f} %")
         print("-" * 40)
         
         
@@ -1217,13 +1303,27 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             print(f'{len(neue_artikel)} Artikel wurden importiert.')
             alle_einkaeufe_anzeigen(neue_artikel)
             neue_artikel, mapping = produkt_mapping_ergaenzen(neue_artikel, mapping)
+            automatisch_ergaenzt = []
             for artikel in neue_artikel:
+                vorher = artikel.copy()
                 produkt_stammdaten_anwenden(artikel, produkt_stammdaten)
+                if artikel != vorher:
+                    automatisch_ergaenzt.append(artikel)
+            if automatisch_ergaenzt:
+                print("Folgende Artikel wurden automatisch durch Produktstammdaten ergänzt:")
+                for artikel in automatisch_ergaenzt:
+                    print(
+                        f"{artikel['produkt_original']} → "
+                        f"{artikel['produkt_standard']} | "
+                        f"{artikel['bio']} | "
+                        f"{artikel['kategorie']} | "
+                        f"{artikel['menge']} {artikel['einheit']} | "
+                        f"{artikel['inhalt_menge']} {artikel['inhalt_einheit']}")
             print("Bitte jetzt die enthaltenen Menge und die Einheit dazu angeben.")
             neue_artikel, inhalte, einheiten_liste = produkt_inhalte_ergaenzen(neue_artikel, inhalte, einheiten_liste)
             for artikel in neue_artikel:
                 vollstaendigkeit_pruefen(artikel)
-            unvollstaendige = unvollstaendige_artikel_sammeln(einkaeufe)
+            unvollstaendige = unvollstaendige_artikel_sammeln(neue_artikel)
             print(f'{len(unvollstaendige)} importierte Artikel sind noch unvollständig.')
             einkaeufe.extend(neue_artikel)
             daten_speichern(dateiname, einkaeufe)
@@ -1252,6 +1352,8 @@ def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, ha
         if wahl == '1':
             einkaeufe, kategorie_zuordnung, mapping, inhalte = eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
+            produkt_mapping_speichern(produkt_mapping_datei, mapping)
+            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
             daten_speichern(dateiname, einkaeufe)
         elif wahl == '2':
             einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten = eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten)
@@ -1285,18 +1387,19 @@ def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, ha
             print('Fehlerhafte Eingabe.')
     
         
-def menue_auswertungen(einkaeufe):
+def menue_auswertungen(einkaeufe, produkt_stammdaten):
     while True:
         print('\n' + '=' * 50)
         print('Auswertungen')
         print('=' * 50)
         print('1 = alle Einkäufe anzeigen')
         print('2 = unvollständige Einträge anzeigen')
-        print('3 = Gesamtbetrag')
+        print('3 = Einkaufsstatistik')
         print('4 = Produktübersicht')
         print('5 = Kategorieübersicht')
-        print('6 = Monatsübersicht')
-        print('7 = Wochenübersicht')
+        print('6 = Händlerübersicht')
+        print('7 = Monatsübersicht')
+        print('8 = Wochenübersicht')
         print('9 = zurück zum Hauptmenü')
         
         wahl = input('Menü-Auswahl: ').strip()
@@ -1306,14 +1409,16 @@ def menue_auswertungen(einkaeufe):
         elif wahl == '2':
             unvollstaendige_einkaeufe_anzeigen(einkaeufe)
         elif wahl == '3':
-            gesamtbetrag(einkaeufe)
+            einkaufsstatistik(einkaeufe)
         elif wahl == '4':
-            produkt_uebersicht(einkaeufe)
+            produkt_uebersicht(produkt_stammdaten)
         elif wahl == '5':
             kategorie_uebersicht(einkaeufe)
         elif wahl == '6':
-            monat_uebersicht(einkaeufe)
+            haendler_uebersicht(einkaeufe)
         elif wahl == '7':
+            monat_uebersicht(einkaeufe)
+        elif wahl == '8':
             woche_uebersicht(einkaeufe)
         elif wahl == '9':
             return
@@ -1362,32 +1467,9 @@ if __name__ == "__main__":
         elif wahl == '2':
             einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten = menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten)
         elif wahl == '3':
-            menue_auswertungen(einkaeufe)
+            menue_auswertungen(einkaeufe, produkt_stammdaten)
         elif wahl == '4':
-            artikel_liste = []
-            test_artikel = {
-            "produkt": "TORTILLAS SALZ",
-            "produkt_original": "TORTILLAS SALZ",
-            "produkt_standard": "Tortillachips",
-            "bio": "nein",
-            "kategorie": "Snacks",
-            "menge": 1.0,
-            "einheit": "Packung",
-            "einzelpreis": 1.49,
-            "inhalt_menge": None,
-            "inhalt_einheit": 'unbekannt',
-            "haendler": "Rewe",
-            "datum": "2026-04-11",
-            "kalenderwoche": 15,
-            "monat": 4,
-            "vollstaendig": False,
-            "zeit": "19:58",
-            "bon_id": "Rewe-2026-04-11-19:58-1556",
-            "fehlende_felder": ['inhalt_menge', 'inhalt_einheit']}
-            artikel_liste.append(test_artikel)
-            neue_artikel_liste, neue_inhalte, neue_einheiten_liste = produkt_inhalte_ergaenzen(artikel_liste, inhalte, einheiten_liste)
-            print(neue_artikel_liste)
-            
+            bild_text_auslesen(dateiname)
         elif wahl == '9':
             daten_speichern(dateiname, einkaeufe)
             print('Programm beendet.')

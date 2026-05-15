@@ -1,27 +1,30 @@
 {
     "KATEGORIEN": [
         "Obst",
-        "Gemüse",
+        "Gemüse",
         "Backwaren",
-        "Süßigkeiten",
+        "Süßigkeiten",
         "Snacks",
         "Milch(ersatz)-Produkte",
         "Convenience",
         "Fleisch/Wurst/Eier",
         "Fisch",
-        "Käse",
+        "Käse",
         "Nudeln",
         "Reis",
         "Backzutaten",
         "Alkohol",
-        "Getränke",
+        "Getränke",
         "Reinigungsmittel",
         "Hygieneartikel",
-        "Wäschepflege",
+        "Wäschepflege",
         "Sonstiges",
         "Test",
         "Saucen",
-        "Rauchwaren"
+        "Rauchwaren",
+        "Kräuter",
+        "Presseerzeugnis",
+        "Hautpflege"
     ],
     "HAENDLER": [
         "Rewe",
@@ -35,7 +38,7 @@
         "Test"
     ],
     "EINHEITEN": [
-        "Stück",
+        "Stück",
         "Packung",
         "Flasche",
         "Glas",
@@ -46,7 +49,11 @@
         "Sonstiges",
         "Träger",
         "Beutel",
-        "Tube"
+        "Tube",
+        "Buch",
+        "Würfel",
+        "Topf",
+        "Becher"
     ],
     "KATEGORIE_ZUORDNUNG": {
         "Obst": [
@@ -55,7 +62,13 @@
             "BIRNE GRUEN",
             "WASSERMELO. MINI"
         ],
-        "Gemüse": [],
+        "Gemüse": [
+            "KARTOFFELN DICK",
+            "KART.MEHLIGKOCH.",
+            "ZWIEBEL ROT BIO",
+            "KOHLRABI",
+            "GURKE BIO"
+        ],
         "Fleisch/Wurst/Eier": [
             "GEFL. SALAMI",
             "KASSELER",
@@ -69,7 +82,11 @@
             "BIO MOZZARELLA"
         ],
         "Convenience": [
-            "BACKCAMEMBERT"
+            "BACKCAMEMBERT",
+            "EP KARTOF.SAL.EI",
+            "SMOOTHIE REWE",
+            "HAPPY CALIF.MIX X01",
+            "PIZZATEIG M.SA."
         ],
         "Gemüse": [
             "KART.MEHLIGKOCH.",
@@ -82,7 +99,10 @@
             "JOG STRACCIATELL",
             "MW BIO JOGH.3,8%",
             "BIO NO MILK",
-            "BIO JOGH. HIMB."
+            "BIO JOGH. HIMB.",
+            "BIO FRISCHKAESE",
+            "BIO H-MILCH 3,8%",
+            "BIO JOGH.GRI.ART"
         ],
         "Wäschepflege": [
             "WAESCHEKLAMMERN"
@@ -93,7 +113,8 @@
         "Backzutaten": [
             "BIO WEIZENMEHL",
             "BIO ROGGENVKMEHL",
-            "BIO BACKHEFE"
+            "BIO BACKHEFE",
+            "BIO HEFEWUERFEL"
         ],
         "Sonstiges": [],
         "Test": [
@@ -104,20 +125,59 @@
         "Backwaren": [
             "LAUGENSTANGEN",
             "CIABATTA",
-            "WELTM.CHIABROET."
+            "WELTM.CHIABROET.",
+            "MILCHBROETCHEN",
+            "BIO DIN.EIWAFFEL"
         ],
         "Snacks": [
             "TORTILLAS SALZ"
         ],
         "Fisch": [
             "SCHLEMMERFILET",
-            "BIO RAEUCHERLACH"
+            "BIO RAEUCHERLACH",
+            "SCHLEMMERF. ITAL"
         ],
         "Saucen": [
-            "SAHNEMEERRETTICH"
+            "SAHNEMEERRETTICH",
+            "TOMATENKETCHUP"
         ],
         "Rauchwaren": [
             "LS AUTH. RED"
+        ],
+        "Käse": [
+            "BIO BERGKAESE",
+            "BIO MAASDAMER",
+            "GER. KAESE A. RI",
+            "TILSITER SCHEIB.",
+            "BIO EMMENTALER",
+            "PARM. REGG. STK.",
+            "BIO MOZZARELLA"
+        ],
+        "Kräuter": [
+            "BASILIKUM"
+        ],
+        "Presseerzeugnis": [
+            "PRESSEERZEUGNIS"
+        ],
+        "Nudeln": [
+            "LINGUINE HW NL",
+            "BIO KINDERPASTA"
+        ],
+        "Süßigkeiten": [
+            "FRITT HIMBEER",
+            "WILDBERRRY",
+            "STRAWBERRY",
+            "WASSEREIS HITSCH",
+            "HARIBO WINE GUMS"
+        ],
+        "Hautpflege": [
+            "NIVEA TAGESCREME"
+        ],
+        "Hygieneartikel": [
+            "ECOLOG. TOIPA"
+        ],
+        "Reinigungsmittel": [
+            "SCHMUTZRADIERER"
         ]
     }
 }
