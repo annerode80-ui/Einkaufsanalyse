@@ -234,5 +234,141 @@
     "SCHMUTZRADIERER": {
         "inhalt_menge": 4.0,
         "inhalt_einheit": "Stück"
+    },
+    "Bio Avocado 2Stück": {
+        "inhalt_menge": 2.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Kiwi": {
+        "inhalt_menge": 4.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Paprika Mix": {
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bioland Wetterapfel": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Zwiebel rot 500g": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Mini Möhren 200g": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Basilikum im Topf": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Topf"
+    },
+    "Bio Gurken": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Petersilie kraus": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Schnittlauch": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Dill": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Paprika rot": {
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BMI Bioland Natur": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Butter mildge.": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland H-Milch 3,8%": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "Brötchen Stein": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bauernbrötchen": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Brötchen Körner": {
+        "inhalt_menge": 95.0,
+        "inhalt_einheit": "g"
+    },
+    "Knotenbeutel0&G": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Birnen rot lose": {
+        "inhalt_menge": 0.738,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Strauchtomaten": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Emmentaler": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Hirtenkäse": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Gouda": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Mand.Van.": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Himb.Holun": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Speisequark 8%": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Schoko": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Haselnuß": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Eier Niedersach.": {
+        "inhalt_menge": 6.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Salami Classic": {
+        "inhalt_menge": 125.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Räucherlachs": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Mozzarella": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Rinderbrühe Glas": {
+        "inhalt_menge": 140.0,
+        "inhalt_einheit": "g"
     }
 }

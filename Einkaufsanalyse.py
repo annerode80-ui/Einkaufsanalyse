@@ -48,6 +48,7 @@ import pytesseract
 from datetime import datetime
 from pypdf import PdfReader
 from PIL import Image
+from PIL import ImageEnhance
 
 
 """
@@ -384,12 +385,6 @@ def pdf_text_auslesen(dateiname):
     return text
 
 
-def bild_text_auslesen(dateiname):
-    bild = Image.open('/Users/Anne/Downloads/PNG-Bild-4538-B071-AD-0.png')
-    text = pytesseract.image_to_string(bild, lang='deu')
-    print(text)
-    return text
-
 """Erzeugt aus dem PDF-Import eines Rewe-Kassenbons die Artikelliste"""
 def rewe_artikel_aus_text(text, mapping, inhalte):
     artikel_liste = []
@@ -482,6 +477,271 @@ def rewe_artikel_aus_text(text, mapping, inhalte):
     return artikel_liste, mapping, inhalte
 
 
+def lidl_png_import(dateiname, mapping, inhalte):
+    text = bild_text_auslesen(dateiname)
+    relevante_zeilen = lidl_Vorfilter(text)
+    artikel_liste, mapping, inhalte = lidl_parser(relevante_zeilen, mapping, inhalte)
+    datum, zeit, kw, monat = rewe_datum_aus_text(text)
+    bonnummer = lidl_bonnummer_aus_text(text)
+    bonnummer = bonnummer_pruefen_und_bearbeiten(bonnummer)
+    bon_id = f'Lidl-{datum}-{zeit}-{bonnummer}'
+    for artikel in artikel_liste:
+        artikel['datum'] = datum
+        artikel['zeit'] = zeit
+        artikel['kalenderwoche'] = kw
+        artikel['monat'] = monat
+        artikel['bon_id'] = bon_id
+        vollstaendigkeit_pruefen(artikel)
+    return bonnummer, artikel_liste, mapping, inhalte
+
+
+def bild_text_auslesen(dateiname):
+    bild = Image.open('PNG-Bild-4538-B071-AD-0.png')
+    bild = bild.resize((bild.width * 3, bild.height * 3), Image.LANCZOS)
+    bild = bild.convert("L")
+    kontrast = ImageEnhance.Contrast(bild)
+    bild = kontrast.enhance(2)
+    bild = bild.point(lambda x: 0 if x < 140 else 255, '1')
+    text = pytesseract.image_to_string(bild, lang='deu', config="--psm 6")
+    return text
+
+
+def lidl_bonnummer_aus_text(text):
+    treffer = re.search(r'Beleg-Nr\.?\s*(\d+)', text, re.IGNORECASE)
+    if treffer:
+        bonnummer = treffer.group(1)
+        if len(bonnummer) != 4:
+            print("Bon-ID länger/kürzer als 4 Ziffern. Bitte prüfen.")
+        return bonnummer
+    return None
+
+
+def bonnummer_pruefen_und_bearbeiten(bonnummer):
+    if bonnummer is None:
+        return None
+    if len(bonnummer) == 4:
+        return bonnummer
+    print(f"Bonnummer wirkt auffällig: {bonnummer}")
+    eingabe = input("Enter = übernehmen oder korrigierte Bonnummer eingeben: ").strip()
+    if eingabe == "":
+        return bonnummer
+    return eingabe
+
+
+def lidl_Vorfilter(text):
+    relevante_zeilen = []
+    zeilen = text.splitlines()
+    for zeile in zeilen:
+        zeile = zeile.strip()
+        zeile_klein = zeile.lower()
+        if 'pfand' in zeile_klein:
+            continue
+        if 'ZU ZAHLEN' in zeile_klein:
+            break
+        if 'kg x' in zeile_klein:
+            relevante_zeilen.append(zeile)
+        elif 'rabatt' in zeile_klein:
+            relevante_zeilen.append(zeile)
+        elif zeile.endswith((' A', ' B')):
+            relevante_zeilen.append(zeile)    
+    return relevante_zeilen
+
+
+def rabatt_aus_text_lesen(rabatt_text, artikelpreis):
+    text = rabatt_text.replace("€", "").strip()
+    # typische OCR-Fehler vor dem Komma
+    if text.startswith("-08"):
+        text = text.replace("-08", "-0", 1)
+    elif text.startswith("-8"):
+        text = text.replace("-8", "-0", 1)
+    elif text.startswith("-9"):
+        text = text.replace("-9", "-0", 1)
+    elif text.startswith("-19"):
+        text = text.replace("-19", "-0,19", 1)
+    elif text.startswith("-50"):
+        text = text.replace("-50", "-0,50", 1)
+    elif text.startswith("-56"):
+        text = text.replace("-56", "-0,56", 1)
+    try:
+        rabatt = abs(float(rabatt_text.replace(",", ".")))
+    except ValueError:
+        return 0
+    if rabatt > artikelpreis:
+        return 0
+    return rabatt
+
+
+def lidl_menge_aus_artikelzeile(zeile):
+    treffer = re.search(r"(?<![a-zäöüß])[x×]\s*(\d+)", zeile.lower())
+    if treffer:
+        return float(treffer.group(1))
+    return 1.0
+
+
+def zahl_ocr_risiko(text): #findet OCR-risikobehaftete Zahlen
+    text = str(text)
+    for zeichen in [ "8"]:
+        if zeichen in text:
+            return True
+    return False
+
+
+def ocr_pruefung_artikel(artikel): # trägt alle risikobehafteten Fälle zusammen
+    preis_hinweise = []
+    rabatt_hinweise = []
+    if zahl_ocr_risiko(artikel.get("einzelpreis", "")):
+        preis_hinweise.append("Preis enthält OCR-riskante Ziffer: 8")
+    for rabatt_zeile in artikel.get("rabatt_rohtexte", []):
+        if zahl_ocr_risiko(rabatt_zeile):
+            rabatt_hinweise.append("Rabattzeile enthält OCR-riskante Ziffer: 8")
+    if artikel.get("rabatt_pruefen"):
+        rabatt_hinweise.append("Rabattzeile per OCR erkannt und muss geprüft werden.")
+    if artikel.get("einzelpreis", 0) > 20:
+        preis_hinweise.append("Einzelpreis wirkt ungewöhnlich hoch.")
+    if artikel.get("rabatt", 0) > artikel.get("einzelpreis", 0):
+        rabatt_hinweise.append("Rabatt ist höher als Artikelpreis.")
+    artikel["ocr_preis_hinweise"] = preis_hinweise
+    artikel["ocr_rabatt_hinweise"] = rabatt_hinweise
+    artikel["ocr_pruefen"] = len(artikel["ocr_preis_hinweise"]) > 0 or len(artikel["ocr_rabatt_hinweise"]) > 0
+    return artikel
+
+
+def ocr_preise_pruefen_und_bearbeiten(artikel_liste):
+    for artikel in artikel_liste:
+        if not artikel.get("ocr_preis_hinweise"):
+            continue
+        einzelpreis_roh = artikel["einzelpreis"]
+        while True:
+            eingabe = input(
+                f"Artikel: {artikel['produkt']} | "
+                f"ausgelesener Preis: {einzelpreis_roh:.2f} €\n"
+                "Mit Enter Preis bestätigen oder neuen Preis eingeben z.B. 1,29: ").strip()
+            if eingabe == "":
+                break
+            try:
+                einzelpreis_bestaetigt = round(float(eingabe.replace(",", ".")), 2)
+                if einzelpreis_bestaetigt <= 0:
+                    print("Preis darf nicht 0 oder negativ sein.")
+                    continue
+                artikel["einzelpreis"] = einzelpreis_bestaetigt
+                break
+            except ValueError:
+                print("Bitte einen gültigen Preis eingeben.")
+    return artikel_liste
+
+
+def ocr_rabatte_pruefen_und_bearbeiten(artikel_liste):
+    for artikel in artikel_liste:
+        if not artikel.get("ocr_rabatt_hinweise"):
+            continue
+        rabatt_summe = 0
+        einzelpreis = artikel['einzelpreis']
+        for rabatt_roh in artikel["rabatt_rohtexte"]:
+            rabatt_teile = rabatt_roh.split()
+            rabatt_name = " ".join(rabatt_teile[:-1])
+            
+            try:
+                rabatt = abs(float(rabatt_teile[-1].replace(',', '.')))
+            except ValueError:
+                    print(f"Rabatt konnte nicht gelesen werden: {rabatt_roh}")
+                    continue
+            while True:
+                eingabe = input(
+                    f"Artikel: {artikel['produkt']} | "
+                    f"ausgelesener Rabatt: {rabatt_name}: {rabatt:.2f} €\n"
+                    "Mit Enter Rabatt bestätigen oder korrekten Rabatt eingeben z.B. 0,29: ").strip()
+                try:
+                    if eingabe == "":
+                        rabatt_bestaetigt = rabatt
+                    else:
+                        rabatt_bestaetigt = round(float(eingabe.replace(',', '.')), 2)
+                    if rabatt_bestaetigt < 0:
+                        print("Rabatt darf nicht negativ sein.")
+                        continue
+                    if rabatt_summe + rabatt_bestaetigt > einzelpreis:
+                        print("Gesamtrabatt ist größer als der Preis. Bitte prüfen.")
+                        continue
+                    rabatt_summe += rabatt_bestaetigt
+                    break
+                except ValueError:
+                    print("Bitte einen gültigen Rabatt eingeben.")
+    return artikel_liste
+
+
+def lidl_parser(relevante_zeilen, mapping, inhalte):
+    letzter_artikel = None
+    artikel_liste = []
+    for zeile in relevante_zeilen:
+        zeile = zeile.strip()
+        if 'kg x' in zeile:
+            if letzter_artikel is not None:
+                teile = zeile.split()
+                try:
+                    menge_roh = float(teile[0].replace(',' , '.'))
+                    einheit = str(teile[1].strip())
+                    letzter_artikel['menge_roh'] = menge
+                    letzter_artikel['einheit'] = einheit
+                    letzter_artikel['inhalt_menge_roh'] = menge
+                    letzter_artikel['inhalt_einheit'] = einheit
+                except (ValueError, IndexError, ZeroDivisionError):
+                    pass
+            continue
+        if 'abatt' in zeile:
+            if letzter_artikel is not None:
+                letzter_artikel["rabatt_pruefen"] = True
+                letzter_artikel["rabatt_rohtexte"].append(zeile)
+            continue
+        teile = zeile.split()
+        einzelpreis_roh = None
+        preis_index = None
+        for i in range (len(teile) -1, -1, -1):
+            preis_text = teile[i].replace(',', '.')
+            try:
+                einzelpreis_roh = float(preis_text)
+                preis_index = i
+                produkt_ende = preis_index
+                if preis_index >= 3 and teile[preis_index - 2].lower() in ["x", "×"]:
+                    produkt_ende = preis_index - 3
+                elif preis_index >= 2 and teile[preis_index - 2].lower().endswith("x"):
+                    produkt_ende = preis_index - 2
+                break
+            except ValueError:
+                continue
+        if einzelpreis_roh is None:
+            continue
+        menge = lidl_menge_aus_artikelzeile(zeile)
+        produkt_teile = teile[:produkt_ende]
+        produkt = ' '.join(produkt_teile)
+        if 'bio' in produkt.lower():
+            bio = 'ja'
+        else:
+            bio = 'unbekannt'
+        inhalt = produkt_inhalte_bestimmen(produkt, inhalte)
+        kategorie = kategorie_vorschlagen(produkt, kategorie_zuordnung)
+        
+        artikel = {"produkt": produkt, 
+                   "produkt_original": produkt, 
+                   "produkt_standard": produkt_standard_bestimmen(produkt, mapping), 
+                   "bio": bio, 
+                   "kategorie": kategorie, 
+                   "menge": menge, 
+                   "einheit": 'Packung', 
+                   "einzelpreis": einzelpreis_roh, 
+                   "rabatt": 0,
+                   "rabatt_rohtexte": [],
+                   "rabatt_pruefen": False,
+                   "inhalt_menge": inhalt['inhalt_menge'],
+                   "inhalt_einheit": inhalt['inhalt_einheit'], 
+                   "haendler": 'Lidl', 
+                   "datum": None, 
+                   "kalenderwoche": None, 
+                   "monat": None, 
+                   "vollstaendig": False}
+        artikel_liste.append(artikel)
+        letzter_artikel = artikel
+    return artikel_liste, mapping, inhalte
+
+
 def kategorie_vorschlagen (produkt, kategorie_zuordnung):
     if kategorie_zuordnung is None:
         kategorie_zuordnung = {}
@@ -543,23 +803,6 @@ def rewe_bonnummer_aus_text(text):
 
 
 def rewe_pdf_import(dateiname, mapping, inhalte):
-    text = pdf_text_auslesen(dateiname)
-    artikel_liste, mapping, inhalte = rewe_artikel_aus_text(text, mapping, inhalte)
-    datum, zeit, kw, monat = rewe_datum_aus_text(text)
-    bonnummer = rewe_bonnummer_aus_text(text)
-    bon_id = f'Rewe-{datum}-{zeit}-{bonnummer}'
-
-    for artikel in artikel_liste:
-        artikel['datum'] = datum
-        artikel['zeit'] = zeit
-        artikel['kalenderwoche'] = kw
-        artikel['monat'] = monat
-        artikel['bon_id'] = bon_id
-        vollstaendigkeit_pruefen(artikel)
-    return artikel_liste, mapping, inhalte
-
-
-def lidl_png_import(dateiname, mapping, inhalte):
     text = pdf_text_auslesen(dateiname)
     artikel_liste, mapping, inhalte = rewe_artikel_aus_text(text, mapping, inhalte)
     datum, zeit, kw, monat = rewe_datum_aus_text(text)
@@ -738,6 +981,36 @@ def datum_eingeben(text):
             return datum_iso, kw, monat
         except ValueError:
             print("Bitte Datum als TT.MM.JJJJ eingeben: ")
+
+
+def import_nachbearbeitung(neue_artikel, einkaeufe, dateiname, mapping, produkt_mapping_datei, inhalte, produkt_inhalte_datei, produkt_stammdaten, einheiten_liste):
+    neue_artikel, mapping = produkt_mapping_ergaenzen(neue_artikel, mapping)
+    automatisch_ergaenzt = []
+    for artikel in neue_artikel:
+        vorher = artikel.copy()
+        produkt_stammdaten_anwenden(artikel, produkt_stammdaten)
+        if artikel != vorher:
+            automatisch_ergaenzt.append(artikel)
+    if automatisch_ergaenzt:
+        print("Folgende Artikel wurden automatisch durch Produktstammdaten ergänzt:")
+        for artikel in automatisch_ergaenzt:
+            print(f"{artikel['produkt_original']} → "
+                  f"{artikel['produkt_standard']} | "
+                  f"{artikel['bio']} | "
+                  f"{artikel['kategorie']} | "
+                  f"{artikel['menge']} {artikel['einheit']} | "
+                  f"{artikel['inhalt_menge']} {artikel['inhalt_einheit']}")
+    print("Bitte jetzt die enthaltenen Menge und die Einheit dazu angeben.")
+    neue_artikel, inhalte, einheiten_liste = produkt_inhalte_ergaenzen(neue_artikel, inhalte, einheiten_liste)
+    for artikel in neue_artikel:
+        vollstaendigkeit_pruefen(artikel)
+    unvollstaendige = unvollstaendige_artikel_sammeln(neue_artikel)
+    print(f'{len(unvollstaendige)} importierte Artikel sind noch unvollständig.')
+    einkaeufe.extend(neue_artikel)
+    daten_speichern(dateiname, einkaeufe)
+    produkt_mapping_speichern(produkt_mapping_datei, mapping)
+    produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
+    return einkaeufe, mapping, inhalte, einheiten_liste
 
 
 def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
@@ -1272,6 +1545,7 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
         print('1 = vollständigen Eintrag hinzufügen')
         print('2 = schnellen Eintrag hinzufügen')
         print('3 = Rewe Kassenbon importieren')
+        print('4 = Lidl Kassenbon importieren')
         print('9 = zurück zum Hauptmenü')
 
         wahl = input('Menü-Auswahl: ').strip()
@@ -1329,6 +1603,30 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             daten_speichern(dateiname, einkaeufe)
             produkt_mapping_speichern(produkt_mapping_datei, mapping)
             produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
+        elif wahl == '4':
+            png_dateiname = eingabe_mit_abbruch('PNG-Dateiname: ')
+            if png_dateiname is None:
+                continue
+            neue_bon_id, neue_artikel, mapping, inhalte = lidl_png_import(png_dateiname, mapping, inhalte)
+            if neue_artikel:
+                neue_bon_id = neue_artikel[0].get('bon_id')
+                if neue_bon_id is None:
+                    print("Keine Bon-ID erkannt. Der Import kann nicht auf Duplikate geprüft werden.")
+                if any(artikel.get('bon_id') == neue_bon_id for artikel in einkaeufe):
+                    print("Dieser Bon wurde bereits importiert.")
+                    continue
+            print(f'{len(neue_artikel)} Artikel wurden importiert.')
+            alle_einkaeufe_anzeigen(neue_artikel)
+            unvollstaendige = unvollstaendige_artikel_sammeln(neue_artikel)
+            print(f'{len(unvollstaendige)} importierte Artikel sind noch unvollständig.')
+            for artikel in neue_artikel:
+                ocr_pruefung_artikel(artikel)
+            ocr_preise_pruefen_und_bearbeiten(neue_artikel)
+            ocr_rabatte_pruefen_und_bearbeiten(neue_artikel)
+            for artikel in neue_artikel:
+                ocr_pruefung_artikel(artikel)
+                vollstaendigkeit_pruefen(artikel)
+            einkaeufe, mapping, inhalte, einheiten_liste = import_nachbearbeitung(neue_artikel, einkaeufe, dateiname, mapping, produkt_mapping_datei, inhalte, produkt_inhalte_datei, produkt_stammdaten, einheiten_liste)
 
         elif wahl == '9':
             return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
@@ -1469,7 +1767,13 @@ if __name__ == "__main__":
         elif wahl == '3':
             menue_auswertungen(einkaeufe, produkt_stammdaten)
         elif wahl == '4':
-            bild_text_auslesen(dateiname)
+            bon_id, artikel_liste, mapping, inhalte = lidl_png_import(dateiname, mapping, inhalte)
+            for artikel in artikel_liste:
+                ocr_pruefung_artikel(artikel)
+                if artikel.get('ocr_hinweise'):
+                    print(f"Zu {artikel['produkt']} liegen OCR-Hinweise vor: {artikel['ocr_hinweise']}")
+                else:
+                    print(f"{artikel['produkt']} | {artikel['einzelpreis']} | {artikel['rabatt_rohtexte']} | {artikel['rabatt_pruefen']} : Keine Auffälligkeiten gefunden.")
         elif wahl == '9':
             daten_speichern(dateiname, einkaeufe)
             print('Programm beendet.')

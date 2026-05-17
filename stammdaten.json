@@ -24,7 +24,8 @@
         "Rauchwaren",
         "Kräuter",
         "Presseerzeugnis",
-        "Hautpflege"
+        "Hautpflege",
+        "Aufstriche"
     ],
     "HAENDLER": [
         "Rewe",
@@ -60,20 +61,36 @@
             "APFEL",
             "BANANE",
             "BIRNE GRUEN",
-            "WASSERMELO. MINI"
+            "WASSERMELO. MINI",
+            "BIRNEN ROT LOSE",
+            "BIO AVOCADO 2STÜCK",
+            "BIO KIWI"
         ],
         "Gemüse": [
             "KARTOFFELN DICK",
             "KART.MEHLIGKOCH.",
             "ZWIEBEL ROT BIO",
             "KOHLRABI",
-            "GURKE BIO"
+            "GURKE BIO",
+            "BIO PAPRIKA MIX",
+            "BIO ZWIEBEL ROT 500G",
+            "BIO MINI MÖHREN 200G",
+            "BIO STRAUCHTOMATEN",
+            "BIO GURKEN",
+            "BIO CHAMPIGNONS",
+            "PAPRIKA ROT"
         ],
         "Fleisch/Wurst/Eier": [
             "GEFL. SALAMI",
             "KASSELER",
             "HAEHN.BRUSTFILET",
-            "BIO EIER OKT"
+            "BIO EIER OKT",
+            "GEFLÜGELFLEISCHWURST",
+            "BIO SALAMI CLASSIC",
+            "GELDERL. BAUCHSPECK",
+            "MINI SCHINKENMETTW.",
+            "SCH.ZW.METTW. FETTR.",
+            "BIO EIER NIEDERSACH."
         ],
         "Käse": [
             "TILSITER SCHEIB.",
@@ -86,7 +103,11 @@
             "EP KARTOF.SAL.EI",
             "SMOOTHIE REWE",
             "HAPPY CALIF.MIX X01",
-            "PIZZATEIG M.SA."
+            "PIZZATEIG M.SA.",
+            "SALATTHUNFISCH",
+            "SALAT CEASAR",
+            "SALAT HÄHNCHEN",
+            "ESPRESSO MACCHIATO"
         ],
         "Gemüse": [
             "KART.MEHLIGKOCH.",
@@ -102,7 +123,14 @@
             "BIO JOGH. HIMB.",
             "BIO FRISCHKAESE",
             "BIO H-MILCH 3,8%",
-            "BIO JOGH.GRI.ART"
+            "BIO JOGH.GRI.ART",
+            "BIOLAND H-MILCH 3,8%",
+            "BIOL. BUTTER MILDGE.",
+            "BIO JOGHURT SCHOKO",
+            "BIOL.JOGH.MAND.VAN.",
+            "BIOL.JOGH.HIMB.HOLUN",
+            "BIOL. SPEISEQUARK 8%",
+            "BIO JOGHURT HASELNUSS"
         ],
         "Wäschepflege": [
             "WAESCHEKLAMMERN"
@@ -116,7 +144,9 @@
             "BIO BACKHEFE",
             "BIO HEFEWUERFEL"
         ],
-        "Sonstiges": [],
+        "Sonstiges": [
+            "KNOTENBEUTEL0&G"
+        ],
         "Test": [
             "TEST",
             "TESTEN",
@@ -127,19 +157,33 @@
             "CIABATTA",
             "WELTM.CHIABROET.",
             "MILCHBROETCHEN",
-            "BIO DIN.EIWAFFEL"
+            "BIO DIN.EIWAFFEL",
+            "BRÖTCHEN KÖRNER",
+            "BAUERNBRÖTCHEN",
+            "BRÖTCHEN STEIN"
         ],
         "Snacks": [
-            "TORTILLAS SALZ"
+            "TORTILLAS SALZ",
+            "ERDNUSSKERNE PIKANT",
+            "ERDNUSSKERNE FAJITA",
+            "SNACK -MANDELN",
+            "HASELNÜSSE GERÖ",
+            "CRUSPIES XXL BBQ",
+            "DILEK MAIS GERÖSTET",
+            "NUTS ROYAL XXL",
+            "CASH-ERD"
         ],
         "Fisch": [
             "SCHLEMMERFILET",
             "BIO RAEUCHERLACH",
-            "SCHLEMMERF. ITAL"
+            "SCHLEMMERF. ITAL",
+            "BIO STREMELLACHS",
+            "BIO RÄUCHERLACHS"
         ],
         "Saucen": [
             "SAHNEMEERRETTICH",
-            "TOMATENKETCHUP"
+            "TOMATENKETCHUP",
+            "BIO RINDERBRÜHE GLAS"
         ],
         "Rauchwaren": [
             "LS AUTH. RED"
@@ -151,10 +195,18 @@
             "TILSITER SCHEIB.",
             "BIO EMMENTALER",
             "PARM. REGG. STK.",
-            "BIO MOZZARELLA"
+            "BIO MOZZARELLA",
+            "BMI BIOLAND NATUR",
+            "BIOLAND EMMENTALER",
+            "BIOLAND HIRTENKÄSE",
+            "BIOLAND GOUDA",
+            "BIOLAND MOZZARELLA"
         ],
         "Kräuter": [
-            "BASILIKUM"
+            "BASILIKUM",
+            "PETERSILIE KRAUS",
+            "SCHNITTLAUCH",
+            "DILL"
         ],
         "Presseerzeugnis": [
             "PRESSEERZEUGNIS"
@@ -168,7 +220,10 @@
             "WILDBERRRY",
             "STRAWBERRY",
             "WASSEREIS HITSCH",
-            "HARIBO WINE GUMS"
+            "HARIBO WINE GUMS",
+            "VOLLK. BUTTERKEKS",
+            "HARIBO PHANTASIA",
+            "BIOLAND HAFERZARTBIT"
         ],
         "Hautpflege": [
             "NIVEA TAGESCREME"
@@ -178,6 +233,11 @@
         ],
         "Reinigungsmittel": [
             "SCHMUTZRADIERER"
+        ],
+        "Aufstriche": [
+            "BIO KONFITÜRE HIMB.",
+            "BIO KONFITÜRE APRIK.",
+            "BIO KONFITÜRE ERDB."
         ]
     }
 }
