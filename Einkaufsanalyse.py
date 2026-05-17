@@ -496,7 +496,7 @@ def lidl_png_import(dateiname, mapping, inhalte):
 
 
 def bild_text_auslesen(dateiname):
-    bild = Image.open('PNG-Bild-4538-B071-AD-0.png')
+    bild = Image.open(dateiname)
     bild = bild.resize((bild.width * 3, bild.height * 3), Image.LANCZOS)
     bild = bild.convert("L")
     kontrast = ImageEnhance.Contrast(bild)
