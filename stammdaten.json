@@ -25,7 +25,10 @@
         "Kräuter",
         "Presseerzeugnis",
         "Hautpflege",
-        "Aufstriche"
+        "Aufstriche",
+        "Heißgetränke",
+        "Müsli/Getreideflocken",
+        "Öle/Fette"
     ],
     "HAENDLER": [
         "Rewe",
@@ -64,7 +67,10 @@
             "WASSERMELO. MINI",
             "BIRNEN ROT LOSE",
             "BIO AVOCADO 2STÜCK",
-            "BIO KIWI"
+            "BIO KIWI",
+            "BIO ORANGEN",
+            "BIO BIRNEN 500G",
+            "MANDARINEN MIT BLATT"
         ],
         "Gemüse": [
             "KARTOFFELN DICK",
@@ -78,7 +84,13 @@
             "BIO STRAUCHTOMATEN",
             "BIO GURKEN",
             "BIO CHAMPIGNONS",
-            "PAPRIKA ROT"
+            "PAPRIKA ROT",
+            "BIO MINI ROMATOMATEN",
+            "BIO FELDSALAT",
+            "BLATTSALAT-ROHK. -MIX",
+            "BIO SONNENMAIS",
+            "BIO PASSIERTE TOMAT.",
+            "BIC SONNENMAIS"
         ],
         "Fleisch/Wurst/Eier": [
             "GEFL. SALAMI",
@@ -90,7 +102,10 @@
             "GELDERL. BAUCHSPECK",
             "MINI SCHINKENMETTW.",
             "SCH.ZW.METTW. FETTR.",
-            "BIO EIER NIEDERSACH."
+            "BIO EIER NIEDERSACH.",
+            "GUT ERK. METTENDEN",
+            "BIO RINDERGULASCH",
+            "BIO RINDERHACKFLEISC"
         ],
         "Käse": [
             "TILSITER SCHEIB.",
@@ -130,7 +145,8 @@
             "BIOL.JOGH.MAND.VAN.",
             "BIOL.JOGH.HIMB.HOLUN",
             "BIOL. SPEISEQUARK 8%",
-            "BIO JOGHURT HASELNUSS"
+            "BIO JOGHURT HASELNUSS",
+            "BIOL. NATURJOGH 3,8%"
         ],
         "Wäschepflege": [
             "WAESCHEKLAMMERN"
@@ -145,7 +161,9 @@
             "BIO HEFEWUERFEL"
         ],
         "Sonstiges": [
-            "KNOTENBEUTEL0&G"
+            "KNOTENBEUTEL0&G",
+            "DIY DISPLAY-0528478",
+            "MASCHENDRAHT"
         ],
         "Test": [
             "TEST",
@@ -160,7 +178,12 @@
             "BIO DIN.EIWAFFEL",
             "BRÖTCHEN KÖRNER",
             "BAUERNBRÖTCHEN",
-            "BRÖTCHEN STEIN"
+            "BRÖTCHEN STEIN",
+            "BROT VOLLK. KÖR",
+            "BRÖTCHEN SCHOKO",
+            "LAUGEN ECK",
+            "BRÖTCHEN WEIZEN",
+            "APFELTASCHE VEG"
         ],
         "Snacks": [
             "TORTILLAS SALZ",
@@ -171,14 +194,19 @@
             "CRUSPIES XXL BBQ",
             "DILEK MAIS GERÖSTET",
             "NUTS ROYAL XXL",
-            "CASH-ERD"
+            "CASH-ERD",
+            "SNACKMANDELN XXL"
         ],
         "Fisch": [
             "SCHLEMMERFILET",
             "BIO RAEUCHERLACH",
             "SCHLEMMERF. ITAL",
             "BIO STREMELLACHS",
-            "BIO RÄUCHERLACHS"
+            "BIO RÄUCHERLACHS",
+            "KNUSPERFIL. TOM-MOZZ",
+            "KNUSPERFILET SENF",
+            "KNUSPERFILET KÄSE",
+            "MSC FISCHSTÄBCHEN"
         ],
         "Saucen": [
             "SAHNEMEERRETTICH",
@@ -200,20 +228,27 @@
             "BIOLAND EMMENTALER",
             "BIOLAND HIRTENKÄSE",
             "BIOLAND GOUDA",
-            "BIOLAND MOZZARELLA"
+            "BIOLAND MOZZARELLA",
+            "BIOLAND EMMEN.GER.",
+            "BIOLAND MOZZAR. GER.",
+            "HIRTENKÄSEW. KRÄUTER"
         ],
         "Kräuter": [
             "BASILIKUM",
             "PETERSILIE KRAUS",
             "SCHNITTLAUCH",
-            "DILL"
+            "DILL",
+            "BIO LEINSAMEN GESCHR"
         ],
         "Presseerzeugnis": [
             "PRESSEERZEUGNIS"
         ],
         "Nudeln": [
             "LINGUINE HW NL",
-            "BIO KINDERPASTA"
+            "BIO KINDERPASTA",
+            "BIOL. DINKEL FUSILI",
+            "EDAMAME SPAGHETT",
+            "BANDNUDELN 2 EI"
         ],
         "Süßigkeiten": [
             "FRITT HIMBEER",
@@ -223,7 +258,12 @@
             "HARIBO WINE GUMS",
             "VOLLK. BUTTERKEKS",
             "HARIBO PHANTASIA",
-            "BIOLAND HAFERZARTBIT"
+            "BIOLAND HAFERZARTBIT",
+            "VEGANE KARAMELLKEKSE",
+            "FRITT GRAPEFRUIT",
+            "FRUCHTGUMI MAGICA",
+            "RED BAND LAKRITZ DUO",
+            "FRUCHTGUMMIBUNTERMIX"
         ],
         "Hautpflege": [
             "NIVEA TAGESCREME"
@@ -238,6 +278,19 @@
             "BIO KONFITÜRE HIMB.",
             "BIO KONFITÜRE APRIK.",
             "BIO KONFITÜRE ERDB."
+        ],
+        "Heißgetränke": [
+            "BIO CAFE DEL MUNDO",
+            "BIO KAFFEE ESPRESSO"
+        ],
+        "Müsli/Getreideflocken": [
+            "BIOLAND HAFERFLOCKEN"
+        ],
+        "Öle/Fette": [
+            "BIO KOKOSNUSSÖL NAT."
+        ],
+        "Getränke": [
+            "COCA COLA"
         ]
     }
 }

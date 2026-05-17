@@ -983,7 +983,18 @@ def datum_eingeben(text):
             print("Bitte Datum als TT.MM.JJJJ eingeben: ")
 
 
-def import_nachbearbeitung(neue_artikel, einkaeufe, dateiname, mapping, produkt_mapping_datei, inhalte, produkt_inhalte_datei, produkt_stammdaten, einheiten_liste):
+def import_nachbearbeitung(neue_artikel, dateien, app_daten, stammdaten_context):
+    dateiname = dateien['einkaeufe']
+    produkt_mapping_datei =dateien['produkt_mapping'] 
+    produkt_inhalte_datei = dateien['produkt_inhalte']
+    
+    einkaeufe = app_daten['einkaeufe']
+    mapping = app_daten['mapping']
+    inhalte = app_daten['inhalte']
+    produkt_stammdaten = app_daten['produkt_stammdaten']
+
+    einheiten_liste = stammdaten_context ['einheiten_liste']
+
     neue_artikel, mapping = produkt_mapping_ergaenzen(neue_artikel, mapping)
     automatisch_ergaenzt = []
     for artikel in neue_artikel:
@@ -1010,7 +1021,7 @@ def import_nachbearbeitung(neue_artikel, einkaeufe, dateiname, mapping, produkt_
     daten_speichern(dateiname, einkaeufe)
     produkt_mapping_speichern(produkt_mapping_datei, mapping)
     produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
-    return einkaeufe, mapping, inhalte, einheiten_liste
+    return app_daten, stammdaten_context
 
 
 def eintrag_hinzufuegen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
@@ -1099,14 +1110,22 @@ def schnellerfassung(einkaeufe, kategorien_liste, einheiten_liste, haendler_list
     return einkaeufe, kategorie_zuordnung, mapping, inhalte
 
 
-def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten):
+def eintrag_vervollstaendigen(app_daten, stammdaten_context):
+    einkaeufe = app_daten['einkaeufe']
+    mapping = app_daten['mapping']
+    inhalte = app_daten['inhalte']
+    kategorie_zuordnung = app_daten['kategorie_zuordnung']
+    produkt_stammdaten = app_daten['produkt_stammdaten']
+
+    einheiten_liste = stammdaten_context ['einheiten_liste']
+    kategorien_liste = stammdaten_context['kategorien_liste']
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
-        return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+        return app_daten
     eintraege_unvollstaendig = unvollstaendige_artikel_sammeln(einkaeufe)
     if not eintraege_unvollstaendig:
         print("Keine unvollständigen Einträge vorhanden.")
-        return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+        return app_daten
     for i, artikel in enumerate(eintraege_unvollstaendig, start=1):
         print(f"{i}:{artikel['datum']} | {artikel['produkt']} | {', '.join(artikel['fehlende_felder'])}")
         print("-" * 100)
@@ -1114,7 +1133,7 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
         try:
             auswahl = eingabe_mit_abbruch('Nummer des Eintrags: ')
             if auswahl is None:
-                return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+                return app_daten
             auswahl = int(auswahl)
             if 1 <= auswahl <= len(eintraege_unvollstaendig):
                 index = auswahl - 1
@@ -1170,17 +1189,26 @@ def eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haen
                 vollstaendigkeit_pruefen(eintrag_auswahl)
                 if eintrag_auswahl['vollstaendig']:
                     produkt_stammdaten = produkt_stammdaten_lernen(eintrag_auswahl, produkt_stammdaten)
-                return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+                return app_daten
             else:
                 print(f"Bitte Zahl zwischen 1 und {len(eintraege_unvollstaendig)} eingeben.")
         except ValueError:
             print("Bitte eine Zahl eingeben.")
     
 
-def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte):
+def eintrag_bearbeiten(app_daten, stammdaten_context):
+    einkaeufe = app_daten['einkaeufe']
+    mapping = app_daten['mapping']
+    inhalte = app_daten['inhalte']
+    kategorie_zuordnung = app_daten['kategorie_zuordnung']
+
+    einheiten_liste = stammdaten_context ['einheiten_liste']
+    kategorien_liste = stammdaten_context['kategorien_liste']
+    haendler_liste = stammdaten_context['haendler_liste']
+    
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
-        return einkaeufe, kategorie_zuordnung, mapping, inhalte
+        return app_daten
     eintraege_vollstaendig = []
     for artikel in einkaeufe:
         if not isinstance(artikel, dict):
@@ -1189,7 +1217,7 @@ def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_li
             eintraege_vollstaendig.append(artikel)
     if not eintraege_vollstaendig:
         print("Keine vollständigen Einträge vorhanden.")
-        return einkaeufe, kategorie_zuordnung, mapping, inhalte
+        return app_daten
     for i, artikel in enumerate(eintraege_vollstaendig, start=1):
         print(f"{i}: {artikel['datum']} | {artikel['produkt']} | {artikel['bio']} | {artikel['kategorie']} | {artikel['menge']} {artikel['einheit']} | {artikel['einzelpreis']:.2f} € | {artikel['inhalt_menge']} {artikel['inhalt_einheit']} | {artikel['haendler']}")
         print("-" * 100)
@@ -1197,7 +1225,7 @@ def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_li
         try:
             auswahl = eingabe_mit_abbruch('Nummer des Eintrags: ')
             if auswahl is None:
-                return einkaeufe, kategorie_zuordnung, mapping, inhalte
+                return app_daten
             auswahl = int(auswahl)
             if 1 <= auswahl <= len(eintraege_vollstaendig):
                 index = auswahl - 1
@@ -1309,7 +1337,11 @@ def eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_li
                         eintrag_auswahl['datum'] = datum_iso
                         vollstaendigkeit_pruefen(eintrag_auswahl)
                     elif wahl == '99':
-                        return einkaeufe, kategorie_zuordnung, mapping, inhalte
+                        app_daten['einkaeufe'] = einkaeufe
+                        app_daten['mapping'] = mapping
+                        app_daten['inhalte'] = inhalte
+                        app_daten['kategorie_zuordnung'] = kategorie_zuordnung
+                        return app_daten
                     else:
                         print('Bitte Zahl zwischen 1 und 9 eingeben.')
         except ValueError:
@@ -1422,7 +1454,7 @@ def einkaufsstatistik(einkaeufe):
     anzahl_einkaeufe = len(bon_daten)
     print(f"Anzahl Einkäufe: {anzahl_einkaeufe}")
     print("-" * 30)
-    print(f"Gesamtausgaben: {gesamt}")
+    print(f"Gesamtausgaben: {gesamt:.2f}")
     print("-" * 30)
     print(f"Durchschnittlicher Einkaufswert: {gesamt/anzahl_einkaeufe:.2f}")
     print("-" * 30)
@@ -1537,7 +1569,21 @@ def gesamtbetrag(einkaeufe):
     print(f"Der Gesamtbetrag für alle vollständigen Artikel beträgt: {gesamt:.2f} €")
 
 
-def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten):
+def menue_erfassung(dateien, app_daten, stammdaten_context):
+    dateiname = dateien['einkaeufe']
+    produkt_mapping_datei =dateien['produkt_mapping'] 
+    produkt_inhalte_datei = dateien['produkt_inhalte']
+    
+    einkaeufe = app_daten['einkaeufe']
+    mapping = app_daten['mapping']
+    inhalte = app_daten['inhalte']
+    produkt_stammdaten = app_daten['produkt_stammdaten']
+    kategorie_zuordnung = app_daten['kategorie_zuordnung']
+
+    einheiten_liste = stammdaten_context ['einheiten_liste']
+    kategorien_liste = stammdaten_context['kategorien_liste']
+    haendler_liste = stammdaten_context['haendler_liste']
+
     while True:
         print('\n' + '=' * 50)
         print('Einträge erfassen')
@@ -1597,12 +1643,7 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             neue_artikel, inhalte, einheiten_liste = produkt_inhalte_ergaenzen(neue_artikel, inhalte, einheiten_liste)
             for artikel in neue_artikel:
                 vollstaendigkeit_pruefen(artikel)
-            unvollstaendige = unvollstaendige_artikel_sammeln(neue_artikel)
-            print(f'{len(unvollstaendige)} importierte Artikel sind noch unvollständig.')
-            einkaeufe.extend(neue_artikel)
-            daten_speichern(dateiname, einkaeufe)
-            produkt_mapping_speichern(produkt_mapping_datei, mapping)
-            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
+            app_daten, stammdaten_context = import_nachbearbeitung(neue_artikel, dateien, app_daten, stammdaten_context)
         elif wahl == '4':
             png_dateiname = eingabe_mit_abbruch('PNG-Dateiname: ')
             if png_dateiname is None:
@@ -1626,15 +1667,35 @@ def menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, hae
             for artikel in neue_artikel:
                 ocr_pruefung_artikel(artikel)
                 vollstaendigkeit_pruefen(artikel)
-            einkaeufe, mapping, inhalte, einheiten_liste = import_nachbearbeitung(neue_artikel, einkaeufe, dateiname, mapping, produkt_mapping_datei, inhalte, produkt_inhalte_datei, produkt_stammdaten, einheiten_liste)
+            app_daten, stammdaten_context = import_nachbearbeitung(neue_artikel, dateien, app_daten, stammdaten_context)
 
         elif wahl == '9':
-            return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+            app_daten['einkaeufe'] = einkaeufe
+            app_daten['mapping'] = mapping
+            app_daten['inhalte'] = inhalte
+            app_daten['produkt_stammdaten'] = produkt_stammdaten
+            app_daten['kategorie_zuordnung'] = kategorie_zuordnung
+
+            stammdaten_context ['einheiten_liste'] = einheiten_liste
+            stammdaten_context['kategorien_liste'] = kategorien_liste
+            stammdaten_context['haendler_liste'] = haendler_liste
+
+            return app_daten
         else:
             print('Fehlerhafte Eingabe.')
             
             
-def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten):
+def menue_bearbeiten(app_daten, stammdaten_context):
+    einkaeufe = app_daten['einkaeufe']
+    mapping = app_daten['mapping']
+    inhalte = app_daten['inhalte']
+    produkt_stammdaten = app_daten['produkt_stammdaten']
+    kategorie_zuordnung = app_daten['kategorie_zuordnung']
+
+    einheiten_liste = stammdaten_context ['einheiten_liste']
+    kategorien_liste = stammdaten_context['kategorien_liste']
+    haendler_liste = stammdaten_context['haendler_liste']
+    
     while True:
         print('\n' + '=' * 50)
         print('Einträge bearbeiten')
@@ -1648,17 +1709,17 @@ def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, ha
         
         wahl = input('Menü-Auswahl: ').strip()
         if wahl == '1':
-            einkaeufe, kategorie_zuordnung, mapping, inhalte = eintrag_bearbeiten(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte)
+            app_daten = eintrag_bearbeiten(app_daten, stammdaten_context)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
-            produkt_mapping_speichern(produkt_mapping_datei, mapping)
-            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
-            daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(dateien ['produkt_mapping'], app_daten ['mapping'])
+            produkt_inhalte_speichern(dateien ['produkt_inhalte'], app_daten ['inhalte'])
+            daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
         elif wahl == '2':
-            einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten = eintrag_vervollstaendigen(einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten)
+            app_daten = eintrag_vervollstaendigen(app_daten, stammdaten_context)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
-            produkt_mapping_speichern(produkt_mapping_datei, mapping)
-            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
-            daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(dateien ['produkt_mapping'], app_daten ['mapping'])
+            produkt_inhalte_speichern(dateien ['produkt_inhalte'], app_daten ['inhalte'])
+            daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
         elif wahl == '3':
             unvollstaendige_einkaeufe_anzeigen(einkaeufe)
             feldname = eingabe_mit_abbruch ("Welches Feld bearbeiten?")
@@ -1670,22 +1731,35 @@ def menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, ha
                 continue
             artikel_liste, kategorie_zuordnung = feld_mehrfach_setzen(artikel_liste, feldname, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung)
             stammdaten_aktualisieren(stammdaten, kategorie_zuordnung, stammdaten_datei)
-            produkt_mapping_speichern(produkt_mapping_datei, mapping)
-            produkt_inhalte_speichern(produkt_inhalte_datei, inhalte)
-            daten_speichern(dateiname, einkaeufe)
+            produkt_mapping_speichern(dateien ['produkt_mapping'], app_daten ['mapping'])
+            produkt_inhalte_speichern(dateien ['produkt_inhalte'], app_daten ['inhalte'])
+            daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
         elif wahl == '4':
             produkt_stammdaten = produkt_stammdaten_aus_vollstaendigen_artikeln_lernen(einkaeufe, produkt_stammdaten)
-            produkt_stammdaten_speichern(produkt_stammdaten_datei, produkt_stammdaten)
+            produkt_stammdaten_speichern(dateien['produkt_stammdaten'], app_daten['produkt_stammdaten'])
         elif wahl == '5':
             einkaeufe = eintrag_loeschen(einkaeufe)
-            daten_speichern(dateiname, einkaeufe)
+            daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
         elif wahl == '9':
-            return einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten
+            app_daten['einkaeufe'] = einkaeufe
+            app_daten['mapping'] = mapping
+            app_daten['inhalte'] = inhalte
+            app_daten['produkt_stammdaten'] = produkt_stammdaten
+            app_daten['kategorie_zuordnung'] = kategorie_zuordnung
+
+            stammdaten_context ['einheiten_liste'] = einheiten_liste
+            stammdaten_context['kategorien_liste'] = kategorien_liste
+            stammdaten_context['haendler_liste'] = haendler_liste
+
+            return app_daten
         else:
             print('Fehlerhafte Eingabe.')
     
         
-def menue_auswertungen(einkaeufe, produkt_stammdaten):
+def menue_auswertungen(app_daten):
+    einkaeufe = app_daten['einkaeufe']
+    produkt_stammdaten = app_daten['produkt_stammdaten']
+    
     while True:
         print('\n' + '=' * 50)
         print('Auswertungen')
@@ -1719,7 +1793,9 @@ def menue_auswertungen(einkaeufe, produkt_stammdaten):
         elif wahl == '8':
             woche_uebersicht(einkaeufe)
         elif wahl == '9':
-            return
+            app_daten['einkaeufe'] = einkaeufe
+            app_daten['produkt_stammdaten'] = produkt_stammdaten
+            return app_daten
         else:
             print('Fehlerhafte Eingabe.')
     
@@ -1748,6 +1824,26 @@ if __name__ == "__main__":
         kategorie_zuordnung = {}
     einkaeufe = daten_laden(dateiname)
 
+    dateien = {
+    "einkaeufe": dateiname,
+    "stammdaten": stammdaten_datei,
+    "produkt_mapping": produkt_mapping_datei,
+    "produkt_inhalte": produkt_inhalte_datei,
+    "produkt_stammdaten": produkt_stammdaten_datei
+    }
+    app_daten = {
+    "einkaeufe": einkaeufe,
+    "mapping": mapping,
+    "inhalte": inhalte,
+    "produkt_stammdaten": produkt_stammdaten,
+    "kategorie_zuordnung": kategorie_zuordnung
+    }
+    stammdaten_context = {
+    "stammdaten": stammdaten,
+    "kategorien_liste": kategorien_liste,
+    "einheiten_liste": einheiten_liste,
+    "haendler_liste": haendler_liste}
+
     while True:
         print('\n' + '=' * 50)
         print('Einkaufsprotokoll')
@@ -1761,21 +1857,15 @@ if __name__ == "__main__":
         wahl = input('Menü-Auswahl: ').strip()
 
         if wahl == '1':
-            einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten = menue_erfassung(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten)
+            app_daten = menue_erfassung(dateien, app_daten, stammdaten_context)
         elif wahl == '2':
-            einkaeufe, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten = menue_bearbeiten(dateiname, einkaeufe, kategorien_liste, einheiten_liste, haendler_liste, kategorie_zuordnung, mapping, inhalte, produkt_stammdaten)
+            app_daten = menue_bearbeiten(app_daten, stammdaten_context)
         elif wahl == '3':
-            menue_auswertungen(einkaeufe, produkt_stammdaten)
+            app_daten = menue_auswertungen(app_daten)
         elif wahl == '4':
-            bon_id, artikel_liste, mapping, inhalte = lidl_png_import(dateiname, mapping, inhalte)
-            for artikel in artikel_liste:
-                ocr_pruefung_artikel(artikel)
-                if artikel.get('ocr_hinweise'):
-                    print(f"Zu {artikel['produkt']} liegen OCR-Hinweise vor: {artikel['ocr_hinweise']}")
-                else:
-                    print(f"{artikel['produkt']} | {artikel['einzelpreis']} | {artikel['rabatt_rohtexte']} | {artikel['rabatt_pruefen']} : Keine Auffälligkeiten gefunden.")
+            print("Gerade gibt es nichts zu testen.")
         elif wahl == '9':
-            daten_speichern(dateiname, einkaeufe)
+            daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
             print('Programm beendet.')
             break
         else:
