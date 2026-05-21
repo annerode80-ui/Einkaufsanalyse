@@ -1,0 +1,1 @@
+# Einkaufsanalyse vom 30.04.2026

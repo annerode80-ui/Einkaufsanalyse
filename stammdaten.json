@@ -1,0 +1,309 @@
+{
+    "KATEGORIEN": [
+        "Obst",
+        "Gemüse",
+        "Backwaren",
+        "Süßigkeiten",
+        "Snacks",
+        "Milch(ersatz)-Produkte",
+        "Convenience",
+        "Fleisch/Wurst/Eier",
+        "Fisch",
+        "Käse",
+        "Nudeln",
+        "Reis",
+        "Backzutaten",
+        "Alkohol",
+        "Getränke",
+        "Reinigungsmittel",
+        "Hygieneartikel",
+        "Wäschepflege",
+        "Sonstiges",
+        "Test",
+        "Saucen",
+        "Rauchwaren",
+        "Kräuter",
+        "Presseerzeugnis",
+        "Hautpflege",
+        "Aufstriche",
+        "Heißgetränke",
+        "Müsli/Getreideflocken",
+        "Öle/Fette",
+        "Pflanzen & Zubehör",
+        "Fleisch-/Wurst-Ersatz"
+    ],
+    "HAENDLER": [
+        "Rewe",
+        "Aldi",
+        "Lidl",
+        "Edeka",
+        "dm",
+        "Rossmann",
+        "Sonstiges",
+        "Kaufland",
+        "Test"
+    ],
+    "EINHEITEN": [
+        "Stück",
+        "Packung",
+        "Flasche",
+        "Glas",
+        "kg",
+        "g",
+        "ml",
+        "l",
+        "Sonstiges",
+        "Träger",
+        "Beutel",
+        "Tube",
+        "Buch",
+        "Würfel",
+        "Topf",
+        "Becher"
+    ],
+    "KATEGORIE_ZUORDNUNG": {
+        "Obst": [
+            "APFEL",
+            "BANANE",
+            "BIRNE GRUEN",
+            "WASSERMELO. MINI",
+            "BIRNEN ROT LOSE",
+            "BIO AVOCADO 2STÜCK",
+            "BIO KIWI",
+            "BIO ORANGEN",
+            "BIO BIRNEN 500G",
+            "MANDARINEN MIT BLATT",
+            "REWE SOMMER-MIX"
+        ],
+        "Gemüse": [
+            "KARTOFFELN DICK",
+            "KART.MEHLIGKOCH.",
+            "ZWIEBEL ROT BIO",
+            "KOHLRABI",
+            "GURKE BIO",
+            "BIO PAPRIKA MIX",
+            "BIO ZWIEBEL ROT 500G",
+            "BIO MINI MÖHREN 200G",
+            "BIO STRAUCHTOMATEN",
+            "BIO GURKEN",
+            "BIO CHAMPIGNONS",
+            "PAPRIKA ROT",
+            "BIO MINI ROMATOMATEN",
+            "BIO FELDSALAT",
+            "BLATTSALAT-ROHK. -MIX",
+            "BIO SONNENMAIS",
+            "BIO PASSIERTE TOMAT.",
+            "BIC SONNENMAIS"
+        ],
+        "Fleisch/Wurst/Eier": [
+            "GEFL. SALAMI",
+            "KASSELER",
+            "HAEHN.BRUSTFILET",
+            "BIO EIER OKT",
+            "GEFLÜGELFLEISCHWURST",
+            "BIO SALAMI CLASSIC",
+            "GELDERL. BAUCHSPECK",
+            "MINI SCHINKENMETTW.",
+            "SCH.ZW.METTW. FETTR.",
+            "BIO EIER NIEDERSACH.",
+            "GUT ERK. METTENDEN",
+            "BIO RINDERGULASCH",
+            "BIO RINDERHACKFLEISC"
+        ],
+        "Käse": [
+            "TILSITER SCHEIB.",
+            "BIO EMMENTALER",
+            "PARM. REGG. STK.",
+            "BIO MOZZARELLA"
+        ],
+        "Convenience": [
+            "BACKCAMEMBERT",
+            "EP KARTOF.SAL.EI",
+            "SMOOTHIE REWE",
+            "HAPPY CALIF.MIX X01",
+            "PIZZATEIG M.SA.",
+            "SALATTHUNFISCH",
+            "SALAT CEASAR",
+            "SALAT HÄHNCHEN",
+            "ESPRESSO MACCHIATO"
+        ],
+        "Gemüse": [
+            "KART.MEHLIGKOCH.",
+            "ZWIEBEL ROT BIO",
+            "KOHLRABI",
+            "GURKE BIO"
+        ],
+        "Milch(ersatz)-Produkte": [
+            "STREICHGUT",
+            "JOG STRACCIATELL",
+            "MW BIO JOGH.3,8%",
+            "BIO NO MILK",
+            "BIO JOGH. HIMB.",
+            "BIO FRISCHKAESE",
+            "BIO H-MILCH 3,8%",
+            "BIO JOGH.GRI.ART",
+            "BIOLAND H-MILCH 3,8%",
+            "BIOL. BUTTER MILDGE.",
+            "BIO JOGHURT SCHOKO",
+            "BIOL.JOGH.MAND.VAN.",
+            "BIOL.JOGH.HIMB.HOLUN",
+            "BIOL. SPEISEQUARK 8%",
+            "BIO JOGHURT HASELNUSS",
+            "BIOL. NATURJOGH 3,8%",
+            "BIO JOGHURT 3,8%"
+        ],
+        "Wäschepflege": [
+            "WAESCHEKLAMMERN"
+        ],
+        "Alkohol": [
+            "HANSE PORTER"
+        ],
+        "Backzutaten": [
+            "BIO WEIZENMEHL",
+            "BIO ROGGENVKMEHL",
+            "BIO BACKHEFE",
+            "BIO HEFEWUERFEL"
+        ],
+        "Sonstiges": [
+            "KNOTENBEUTEL0&G",
+            "DIY DISPLAY-0528478",
+            "MASCHENDRAHT"
+        ],
+        "Test": [
+            "TEST",
+            "TESTEN",
+            "TEST-KURZ"
+        ],
+        "Backwaren": [
+            "LAUGENSTANGEN",
+            "CIABATTA",
+            "WELTM.CHIABROET.",
+            "MILCHBROETCHEN",
+            "BIO DIN.EIWAFFEL",
+            "BRÖTCHEN KÖRNER",
+            "BAUERNBRÖTCHEN",
+            "BRÖTCHEN STEIN",
+            "BROT VOLLK. KÖR",
+            "BRÖTCHEN SCHOKO",
+            "LAUGEN ECK",
+            "BRÖTCHEN WEIZEN",
+            "APFELTASCHE VEG"
+        ],
+        "Snacks": [
+            "TORTILLAS SALZ",
+            "ERDNUSSKERNE PIKANT",
+            "ERDNUSSKERNE FAJITA",
+            "SNACK -MANDELN",
+            "HASELNÜSSE GERÖ",
+            "CRUSPIES XXL BBQ",
+            "DILEK MAIS GERÖSTET",
+            "NUTS ROYAL XXL",
+            "CASH-ERD",
+            "SNACKMANDELN XXL"
+        ],
+        "Fisch": [
+            "SCHLEMMERFILET",
+            "BIO RAEUCHERLACH",
+            "SCHLEMMERF. ITAL",
+            "BIO STREMELLACHS",
+            "BIO RÄUCHERLACHS",
+            "KNUSPERFIL. TOM-MOZZ",
+            "KNUSPERFILET SENF",
+            "KNUSPERFILET KÄSE",
+            "MSC FISCHSTÄBCHEN"
+        ],
+        "Saucen": [
+            "SAHNEMEERRETTICH",
+            "TOMATENKETCHUP",
+            "BIO RINDERBRÜHE GLAS",
+            "BIO TOMATENS.RIC"
+        ],
+        "Rauchwaren": [
+            "LS AUTH. RED"
+        ],
+        "Käse": [
+            "BIO BERGKAESE",
+            "BIO MAASDAMER",
+            "GER. KAESE A. RI",
+            "TILSITER SCHEIB.",
+            "BIO EMMENTALER",
+            "PARM. REGG. STK.",
+            "BIO MOZZARELLA",
+            "BMI BIOLAND NATUR",
+            "BIOLAND EMMENTALER",
+            "BIOLAND HIRTENKÄSE",
+            "BIOLAND GOUDA",
+            "BIOLAND MOZZARELLA",
+            "BIOLAND EMMEN.GER.",
+            "BIOLAND MOZZAR. GER.",
+            "HIRTENKÄSEW. KRÄUTER"
+        ],
+        "Kräuter": [
+            "BASILIKUM",
+            "PETERSILIE KRAUS",
+            "SCHNITTLAUCH",
+            "DILL",
+            "BIO LEINSAMEN GESCHR"
+        ],
+        "Presseerzeugnis": [
+            "PRESSEERZEUGNIS"
+        ],
+        "Nudeln": [
+            "LINGUINE HW NL",
+            "BIO KINDERPASTA",
+            "BIOL. DINKEL FUSILI",
+            "EDAMAME SPAGHETT",
+            "BANDNUDELN 2 EI",
+            "BIO CAPPELLETT.S",
+            "TORT. TOM-MOZ"
+        ],
+        "Süßigkeiten": [
+            "FRITT HIMBEER",
+            "WILDBERRRY",
+            "STRAWBERRY",
+            "WASSEREIS HITSCH",
+            "HARIBO WINE GUMS",
+            "VOLLK. BUTTERKEKS",
+            "HARIBO PHANTASIA",
+            "BIOLAND HAFERZARTBIT",
+            "VEGANE KARAMELLKEKSE",
+            "FRITT GRAPEFRUIT",
+            "FRUCHTGUMI MAGICA",
+            "RED BAND LAKRITZ DUO",
+            "FRUCHTGUMMIBUNTERMIX"
+        ],
+        "Hautpflege": [
+            "NIVEA TAGESCREME"
+        ],
+        "Hygieneartikel": [
+            "ECOLOG. TOIPA"
+        ],
+        "Reinigungsmittel": [
+            "SCHMUTZRADIERER"
+        ],
+        "Aufstriche": [
+            "BIO KONFITÜRE HIMB.",
+            "BIO KONFITÜRE APRIK.",
+            "BIO KONFITÜRE ERDB."
+        ],
+        "Heißgetränke": [
+            "BIO CAFE DEL MUNDO",
+            "BIO KAFFEE ESPRESSO"
+        ],
+        "Müsli/Getreideflocken": [
+            "BIOLAND HAFERFLOCKEN"
+        ],
+        "Öle/Fette": [
+            "BIO KOKOSNUSSÖL NAT."
+        ],
+        "Getränke": [
+            "COCA COLA"
+        ],
+        "Pflanzen & Zubehör": [
+            "BLUMENERDE TOFFR"
+        ],
+        "Fleisch-/Wurst-Ersatz": [
+            "VEGGIE-FLEISCHWU"
+        ]
+    }
+}

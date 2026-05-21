@@ -1,0 +1,1550 @@
+{
+    "GEFL. SALAMI": {
+        "produkt_standard": "Geflügelsalami",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 80,
+        "inhalt_einheit": "g"
+    },
+    "KASSELER": {
+        "produkt_standard": "Kasseler-Aufschnitt",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "g"
+    },
+    "HAEHN.BRUSTFILET": {
+        "produkt_standard": "Hähnchenbrustfilet",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "g"
+    },
+    "TILSITER SCHEIB.": {
+        "produkt_standard": "Tilsiter",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200,
+        "inhalt_einheit": "g"
+    },
+    "BIO EMMENTALER": {
+        "produkt_standard": "Emmentaler",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150,
+        "inhalt_einheit": "g"
+    },
+    "PARM. REGG. STK.": {
+        "produkt_standard": "Parmesan",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 150,
+        "inhalt_einheit": "g"
+    },
+    "BACKCAMEMBERT": {
+        "produkt_standard": "Back-Camembert",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 4,
+        "inhalt_einheit": "Stück"
+    },
+    "BANANE BIO": {
+        "produkt_standard": "Banane",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 0.765,
+        "einheit": "kg",
+        "inhalt_menge": 0.765,
+        "inhalt_einheit": "kg"
+    },
+    "BIRNE GRUEN": {
+        "produkt_standard": "Birne",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 0.79,
+        "einheit": "kg",
+        "inhalt_menge": 0.79,
+        "inhalt_einheit": "kg"
+    },
+    "KART.MEHLIGKOCH.": {
+        "produkt_standard": "Kartoffeln",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 2.5,
+        "inhalt_einheit": "kg"
+    },
+    "ZWIEBEL ROT BIO": {
+        "produkt_standard": "Rote Zwiebeln",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 500,
+        "inhalt_einheit": "g"
+    },
+    "KOHLRABI": {
+        "produkt_standard": "Kohlrabi",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO EIER OKT": {
+        "produkt_standard": "Eier",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 10,
+        "inhalt_einheit": "Stück"
+    },
+    "STREICHGUT": {
+        "produkt_standard": "Streichfett",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200,
+        "inhalt_einheit": "g"
+    },
+    "MW BIO JOGH.3,8%": {
+        "produkt_standard": "Joghurt Natur",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 2.0,
+        "einheit": "Glas",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "JOG STRACCIATELL": {
+        "produkt_standard": "Joghurt Stracciatella",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO WEIZENMEHL": {
+        "produkt_standard": "Weizenmehl",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "BIO ROGGENVKMEHL": {
+        "produkt_standard": "Roggenvollkornmehl",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "BIO BACKHEFE": {
+        "produkt_standard": "Backhefe",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "HANSE PORTER": {
+        "produkt_standard": "Hanse Porter",
+        "bio": "nein",
+        "kategorie": "Alkohol",
+        "menge": 1.0,
+        "einheit": "Träger",
+        "inhalt_menge": 6,
+        "inhalt_einheit": "Flasche"
+    },
+    "WAESCHEKLAMMERN": {
+        "produkt_standard": "Wäscheklammern",
+        "bio": "nein",
+        "kategorie": "Wäschepflege",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 24,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO RAEUCHERLACH": {
+        "produkt_standard": "Räucherlachs",
+        "bio": "ja",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100,
+        "inhalt_einheit": "g"
+    },
+    "SAHNEMEERRETTICH": {
+        "produkt_standard": "Meerrettich",
+        "bio": "nein",
+        "kategorie": "Saucen",
+        "menge": 1.0,
+        "einheit": "Tube",
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "APFELMARK": {
+        "produkt_standard": "Apfelmark",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    },
+    "WASSERMELO. MINI": {
+        "produkt_standard": "Wassermelone",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 1.714,
+        "einheit": "kg",
+        "inhalt_menge": 1.714,
+        "inhalt_einheit": "kg"
+    },
+    "TORTILLAS SALZ": {
+        "produkt_standard": "Tortillachips",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "LS AUTH. RED": {
+        "produkt_standard": "Lucky Strike Red",
+        "bio": "nein",
+        "kategorie": "Rauchwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 22.0,
+        "inhalt_einheit": "Stück"
+    },
+    "CIABATTA": {
+        "produkt_standard": "Ciabatta",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "WELTM.CHIABROET.": {
+        "produkt_standard": "Weltmeister-Brötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 40.0,
+        "inhalt_einheit": "g"
+    },
+    "GURKE BIO": {
+        "produkt_standard": "Gurke",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO NO MILK": {
+        "produkt_standard": "Haferdrink",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 4.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO JOGH. HIMB.": {
+        "produkt_standard": "Joghurt Himbeere",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "LAUGENSTANGEN": {
+        "produkt_standard": "Laugenstangen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO FRISCHKAESE": {
+        "produkt_standard": "Frischkäse",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 175.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO HEFEWUERFEL": {
+        "produkt_standard": "Hefewürfel",
+        "bio": "ja",
+        "kategorie": "Backzutaten",
+        "menge": 1.0,
+        "einheit": "Würfel",
+        "inhalt_menge": 42.0,
+        "inhalt_einheit": "g"
+    },
+    "SMOOTHIE REWE": {
+        "produkt_standard": "Smoothie",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Flasche",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "SMOOTHIE APFEL": {
+        "produkt_standard": "Smoothie",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Flasche",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "TOMATENKETCHUP": {
+        "produkt_standard": "Tomatenketchup",
+        "bio": "nein",
+        "kategorie": "Saucen",
+        "menge": 2.0,
+        "einheit": "Flasche",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "ml"
+    },
+    "BIO BERGKAESE": {
+        "produkt_standard": "Bergkäse",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO MAASDAMER": {
+        "produkt_standard": "Maasdamer",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "PIZZATEIG M.SA.": {
+        "produkt_standard": "Pizzateig",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 600.0,
+        "inhalt_einheit": "g"
+    },
+    "KARTOFFELN DICK": {
+        "produkt_standard": "Kartoffeln",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 2.5,
+        "inhalt_einheit": "kg"
+    },
+    "BASILIKUM": {
+        "produkt_standard": "Basilikum",
+        "bio": "nein",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Topf",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "SCHLEMMERF. ITAL": {
+        "produkt_standard": "Schlemmerfilet Italienisch",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "SCHLEMMERFILET": {
+        "produkt_standard": "Schlemmerfilet Bordelaise",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "PRESSEERZEUGNIS": {
+        "produkt_standard": "Buch/Zeitschrift",
+        "bio": "nein",
+        "kategorie": "Presseerzeugnis",
+        "menge": 1.0,
+        "einheit": "Buch",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO JOGH.GRI.ART": {
+        "produkt_standard": "Joghurt Griechische Art",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Becher",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "NIVEA TAGESCREME": {
+        "produkt_standard": "Nivea Tagescreme",
+        "bio": "nein",
+        "kategorie": "Hautpflege",
+        "menge": 1.0,
+        "einheit": "Tube",
+        "inhalt_menge": 50.0,
+        "inhalt_einheit": "ml"
+    },
+    "ECOLOG. TOIPA": {
+        "produkt_standard": "Toilettenpapier",
+        "bio": "ja",
+        "kategorie": "Hygieneartikel",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 8.0,
+        "inhalt_einheit": "Stück"
+    },
+    "SCHMUTZRADIERER": {
+        "produkt_standard": "Schmutzradierer",
+        "bio": "nein",
+        "kategorie": "Reinigungsmittel",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 4.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO MOZZARELLA": {
+        "produkt_standard": "Mozzarella",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 3.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "MILCHBROETCHEN": {
+        "produkt_standard": "Milchbrötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 480.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO DIN.EIWAFFEL": {
+        "produkt_standard": "Dinkel-Eiwaffeln",
+        "bio": "ja",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 165.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO H-MILCH 3,8%": {
+        "produkt_standard": "H-Milch 3,8%",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 3.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "LINGUINE HW NL": {
+        "produkt_standard": "Linguine",
+        "bio": "ja",
+        "kategorie": "Nudeln",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO KINDERPASTA": {
+        "produkt_standard": "Kinderpasta",
+        "bio": "ja",
+        "kategorie": "Nudeln",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "FRITT HIMBEER": {
+        "produkt_standard": "Fritt Himbeere",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "WILDBERRRY": {
+        "produkt_standard": "Fritt Wildberry",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "STRAWBERRY": {
+        "produkt_standard": "Fritt Erdbeere",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "WASSEREIS HITSCH": {
+        "produkt_standard": "Hitschler Wassereis",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "ml"
+    },
+    "HARIBO WINE GUMS": {
+        "produkt_standard": "Haribo Winegums",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 175.0,
+        "inhalt_einheit": "g"
+    },
+    "Birnen rot lose": {
+        "produkt_standard": "Birne",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 0.738,
+        "einheit": "kg",
+        "inhalt_menge": 0.738,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Avocado 2Stück": {
+        "produkt_standard": "Avocado",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 2.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Kiwi": {
+        "produkt_standard": "Kiwi",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 4.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Paprika Mix": {
+        "produkt_standard": "Paprika Mix",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bioland Wetterapfel": {
+        "produkt_standard": "Apfel",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Strauchtomaten": {
+        "produkt_standard": "Strauchtomaten",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Zwiebel rot 500g": {
+        "produkt_standard": "Rote Zwiebeln",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Mini Möhren 200g": {
+        "produkt_standard": "Mini Möhren",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Basilikum im Topf": {
+        "produkt_standard": "Basilikum",
+        "bio": "nein",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Topf"
+    },
+    "Bio Gurken": {
+        "produkt_standard": "Gurke",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Champignons": {
+        "produkt_standard": "Champignons",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Petersilie kraus": {
+        "produkt_standard": "Petersilie",
+        "bio": "nein",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Schnittlauch": {
+        "produkt_standard": "Schnittlauch",
+        "bio": "nein",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Dill": {
+        "produkt_standard": "Dill",
+        "bio": "nein",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Paprika rot": {
+        "produkt_standard": "Paprika Rot",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BMI Bioland Natur": {
+        "produkt_standard": "Landkäse",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Geflügelfleischwurst": {
+        "produkt_standard": "Geflügelfleischwurst",
+        "bio": "nein",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Salami Classic": {
+        "produkt_standard": "Salami",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 125.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Emmentaler": {
+        "produkt_standard": "Emmentaler",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Hirtenkäse": {
+        "produkt_standard": "Hirtenkäse",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Gouda": {
+        "produkt_standard": "Gouda",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Schoko": {
+        "produkt_standard": "Joghurt Schoko",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Mand.Van.": {
+        "produkt_standard": "Joghurt Mandarine Vanille",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Himb.Holun": {
+        "produkt_standard": "Joghurt Himbeer Holunder",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Speisequark 8%": {
+        "produkt_standard": "Speisequark",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Haselnuß": {
+        "produkt_standard": "Joghurt Haselnuss",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Stremellachs": {
+        "produkt_standard": "Stremellachs",
+        "bio": "ja",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "SalatThunfisch": {
+        "produkt_standard": "Salatbowl Thunfisch",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Salat Ceasar": {
+        "produkt_standard": "Salatbowl Caesar",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Salat Hähnchen": {
+        "produkt_standard": "Salatbowl Hähnchen",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Gelderl. Bauchspeck": {
+        "produkt_standard": "Gelderländer Bauchspeck",
+        "bio": "nein",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Mini Schinkenmettw.": {
+        "produkt_standard": "Schinkenmettwurst",
+        "bio": "nein",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Sch.Zw.Mettw. Fettr.": {
+        "produkt_standard": "Schinken-Zwiebelmettwurst",
+        "bio": "nein",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Räucherlachs": {
+        "produkt_standard": "Räucherlachs",
+        "bio": "ja",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Butter mildge.": {
+        "produkt_standard": "Butter",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Mozzarella": {
+        "produkt_standard": "Mozzarella",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Espresso Macchiato": {
+        "produkt_standard": "Espresso Macchiato",
+        "bio": "nein",
+        "kategorie": "Convenience",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "Bioland H-Milch 3,8%": {
+        "produkt_standard": "H-Milch 3,8%",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "Bio Rinderbrühe Glas": {
+        "produkt_standard": "Rinderbrühe",
+        "bio": "ja",
+        "kategorie": "Saucen",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 140.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Konfitüre Himb.": {
+        "produkt_standard": "Konfitüre Himbeer",
+        "bio": "ja",
+        "kategorie": "Aufstriche",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 260.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Eier Niedersach.": {
+        "produkt_standard": "Eier",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 6.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Konfitüre Aprik.": {
+        "produkt_standard": "Konfitüre Aprikose",
+        "bio": "ja",
+        "kategorie": "Aufstriche",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 260.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Konfitüre Erdb.": {
+        "produkt_standard": "Konfitüre Erdbeer",
+        "bio": "ja",
+        "kategorie": "Aufstriche",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 260.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland HaferZartbit": {
+        "produkt_standard": "Haferkekse Zartbitter",
+        "bio": "ja",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Brötchen Stein": {
+        "produkt_standard": "Steinofenbrötchen",
+        "bio": "ja",
+        "kategorie": "Backwaren",
+        "menge": 2.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Haribo Phantasia": {
+        "produkt_standard": "Haribo Phantasia",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 360.0,
+        "inhalt_einheit": "g"
+    },
+    "Vollk. Butterkeks": {
+        "produkt_standard": "Vollkorn-Butterkeks",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Nuts Royal XXL": {
+        "produkt_standard": "Nussmischung",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "DILEK Mais geröstet": {
+        "produkt_standard": "Mais Geröstet",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 125.0,
+        "inhalt_einheit": "g"
+    },
+    "Cruspies XXL BBQ": {
+        "produkt_standard": "Erdnüsse Im Teigmantel Bbq",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Haselnüsse gerö": {
+        "produkt_standard": "Haselnüsse Geröstet",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Snack -Mandeln": {
+        "produkt_standard": "Mandeln",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Erdnusskerne Pikant": {
+        "produkt_standard": "Erdnüsse Pikant",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Erdnusskerne Fajita": {
+        "produkt_standard": "Erdnüsse Fajita",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Cash-Erd": {
+        "produkt_standard": "Cashew-Erdnuss-Mix",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bauernbrötchen": {
+        "produkt_standard": "Bauernbrötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 2.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Brötchen Körner": {
+        "produkt_standard": "Körnerbrötchen",
+        "bio": "ja",
+        "kategorie": "Backwaren",
+        "menge": 2.0,
+        "einheit": "Stück",
+        "inhalt_menge": 95.0,
+        "inhalt_einheit": "g"
+    },
+    "Knotenbeutel0&G": {
+        "produkt_standard": "Knotenbeutel",
+        "bio": "nein",
+        "kategorie": "Sonstiges",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Banane Fair Bio": {
+        "produkt_standard": "Banane",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 0.912,
+        "einheit": "kg",
+        "inhalt_menge": 0.912,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Mini Romatomaten": {
+        "produkt_standard": "Romatomaten",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Speisek": {
+        "produkt_standard": "Kartoffel",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 1.5,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Feldsalat": {
+        "produkt_standard": "Feldsalat",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Orangen": {
+        "produkt_standard": "Orange",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Möhren": {
+        "produkt_standard": "Möhre",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Birnen 500g": {
+        "produkt_standard": "Birne",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "MSC Fischstäbchen": {
+        "produkt_standard": "Fischstäbchen",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 450.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfil. Tom-Mozz": {
+        "produkt_standard": "Knusperfilet Tomate-Mozzarella",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfilet Senf": {
+        "produkt_standard": "Knusperfilet Senf",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfilet Käse": {
+        "produkt_standard": "Knusperfile Käse",
+        "bio": "nein",
+        "kategorie": "Fisch",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Emmen.ger.": {
+        "produkt_standard": "Emmentaler Gerieben",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Mozzar. ger.": {
+        "produkt_standard": "Mozzarella Gerieben",
+        "bio": "ja",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Gut Erk. Mettenden": {
+        "produkt_standard": "Mettenden",
+        "bio": "nein",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Naturjogh 3,8%": {
+        "produkt_standard": "Joghurt Natur 3,8%",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 2.0,
+        "einheit": "Becher",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Blattsalat-Rohk. -Mix": {
+        "produkt_standard": "Blattsalat Mix",
+        "bio": "nein",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Hirtenkäsew. Kräuter": {
+        "produkt_standard": "Hirtenkäsewürfel Kräuter",
+        "bio": "nein",
+        "kategorie": "Käse",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Dinkel Fusili": {
+        "produkt_standard": "Fusili",
+        "bio": "ja",
+        "kategorie": "Nudeln",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Cafe del Mundo": {
+        "produkt_standard": "Kaffebohnen",
+        "bio": "ja",
+        "kategorie": "Heißgetränke",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Kaffee Espresso": {
+        "produkt_standard": "Espressobohnen",
+        "bio": "ja",
+        "kategorie": "Heißgetränke",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bioland Haferflocken": {
+        "produkt_standard": "Haferflocken",
+        "bio": "ja",
+        "kategorie": "Müsli/Getreideflocken",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Leinsamen geschr": {
+        "produkt_standard": "Leinsamen Geschrotet",
+        "bio": "ja",
+        "kategorie": "Kräuter",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Kokosnussöl nat.": {
+        "produkt_standard": "Kokosnussöl",
+        "bio": "ja",
+        "kategorie": "Öle/Fette",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 450.0,
+        "inhalt_einheit": "ml"
+    },
+    "Bio Sonnenmais": {
+        "produkt_standard": "Mais",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 3.0,
+        "einheit": "Packung",
+        "inhalt_menge": 425.0,
+        "inhalt_einheit": "ml"
+    },
+    "Brot Vollk. Kör": {
+        "produkt_standard": "Vollkornbrot",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Vegane Karamellkekse": {
+        "produkt_standard": "Karamellkekse",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Fritt Grapefruit": {
+        "produkt_standard": "Fritt Grapefruit",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 7.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Rindergulasch": {
+        "produkt_standard": "Rindergulasch",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Mandarinen mit Blatt": {
+        "produkt_standard": "Mandarinen",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 750.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Apfel rot 600g": {
+        "produkt_standard": "Apfel",
+        "bio": "ja",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 600.0,
+        "inhalt_einheit": "g"
+    },
+    "Edamame Spaghett": {
+        "produkt_standard": "Edamame Spaghetti",
+        "bio": "nein",
+        "kategorie": "Nudeln",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bandnudeln 2 Ei": {
+        "produkt_standard": "Bandnudeln",
+        "bio": "nein",
+        "kategorie": "Nudeln",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Passierte Tomat.": {
+        "produkt_standard": "Passierte Tomaten",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 2.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bic Sonnenmais": {
+        "produkt_standard": "Mais",
+        "bio": "ja",
+        "kategorie": "Gemüse",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 425.0,
+        "inhalt_einheit": "ml"
+    },
+    "Coca Cola": {
+        "produkt_standard": "Coca Cola",
+        "bio": "nein",
+        "kategorie": "Getränke",
+        "menge": 1.0,
+        "einheit": "Flasche",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "Snackmandeln XXL": {
+        "produkt_standard": "Mandeln",
+        "bio": "nein",
+        "kategorie": "Snacks",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Fruchtgumi Magica": {
+        "produkt_standard": "Fruchtgummi Magica",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Apfeltasche Veg": {
+        "produkt_standard": "Apfeltasche",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 105.0,
+        "inhalt_einheit": "g"
+    },
+    "Brötchen Schoko": {
+        "produkt_standard": "Schoko-Brötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "Laugen Eck": {
+        "produkt_standard": "Laugeneck",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 2.0,
+        "einheit": "Stück",
+        "inhalt_menge": 90.0,
+        "inhalt_einheit": "g"
+    },
+    "Brötchen Weizen": {
+        "produkt_standard": "Weizenbrötchen",
+        "bio": "nein",
+        "kategorie": "Backwaren",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 60.0,
+        "inhalt_einheit": "g"
+    },
+    "Red Band Lakritz Duo": {
+        "produkt_standard": "Lakritz",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "FruchtgummiBunterMix": {
+        "produkt_standard": "Fruchtgummi Bunter Mix",
+        "bio": "nein",
+        "kategorie": "Süßigkeiten",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Rinderhackfleisc": {
+        "produkt_standard": "Rinderhackfleisch",
+        "bio": "ja",
+        "kategorie": "Fleisch/Wurst/Eier",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 800.0,
+        "inhalt_einheit": "g"
+    },
+    "DIY Display-0528478": {
+        "produkt_standard": "DIY Display-0528478",
+        "bio": "nein",
+        "kategorie": "Sonstiges",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Maschendraht": {
+        "produkt_standard": "Maschendraht",
+        "bio": "nein",
+        "kategorie": "Sonstiges",
+        "menge": 1.0,
+        "einheit": "Stück",
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO CAPPELLETT.S": {
+        "produkt_standard": "Cappelletti Spinat-Ricotta",
+        "bio": "ja",
+        "kategorie": "Nudeln",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "TORT. TOM-MOZ": {
+        "produkt_standard": "Tortellini Tomate-Mozzarella",
+        "bio": "ja",
+        "kategorie": "Nudeln",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "BLUMENERDE TOFFR": {
+        "produkt_standard": "Blumenerde Torffrei",
+        "bio": "ja",
+        "kategorie": "Pflanzen & Zubehör",
+        "menge": 1.0,
+        "einheit": "Beutel",
+        "inhalt_menge": 20.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO TOMATENS.RIC": {
+        "produkt_standard": "Tomatensauce Ricotta",
+        "bio": "ja",
+        "kategorie": "Saucen",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "VEGGIE-FLEISCHWU": {
+        "produkt_standard": "Vegetarische Fleischwurst",
+        "bio": "nein",
+        "kategorie": "Fleisch-/Wurst-Ersatz",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO JOGHURT 3,8%": {
+        "produkt_standard": "Joghurt Natur 3,8%",
+        "bio": "ja",
+        "kategorie": "Milch(ersatz)-Produkte",
+        "menge": 1.0,
+        "einheit": "Glas",
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "REWE SOMMER-MIX": {
+        "produkt_standard": "Tk-Früchte Sommer-Mix",
+        "bio": "nein",
+        "kategorie": "Obst",
+        "menge": 1.0,
+        "einheit": "Packung",
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    }
+}

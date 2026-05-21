@@ -1,0 +1,670 @@
+{
+    "TORTILLAS SALZ": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "G"
+    },
+    "HANSE PORTER": {
+        "inhalt_menge": 6,
+        "inhalt_einheit": "Flasche"
+    },
+    "BIO MOZZARELLA": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "G"
+    },
+    "GEFL. SALAMI": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "KASSELER": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "HAEHN.BRUSTFILET": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "TILSITER SCHEIB.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO EMMENTALER": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "PARM. REGG. STK.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BACKCAMEMBERT": {
+        "inhalt_menge": 4,
+        "inhalt_einheit": "Stück"
+    },
+    "KART.MEHLIGKOCH.": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Beutel"
+    },
+    "ZWIEBEL ROT BIO": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Beutel"
+    },
+    "KOHLRABI": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO EIER OKT": {
+        "inhalt_menge": 10,
+        "inhalt_einheit": "Stück"
+    },
+    "STREICHGUT": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "MW BIO JOGH.3,8%": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "JOG STRACCIATELL": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO WEIZENMEHL": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO ROGGENVKMEHL": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "BIO BACKHEFE": {
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "WAESCHEKLAMMERN": {
+        "inhalt_menge": 24,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO RAEUCHERLACH": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "G"
+    },
+    "SAHNEMEERRETTICH": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "G"
+    },
+    "APFELMARK": {
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    },
+    "LS AUTH. RED": {
+        "inhalt_menge": 22.0,
+        "inhalt_einheit": "Stück"
+    },
+    "WASSERMELO. MINI": {
+        "inhalt_menge": 2.153,
+        "inhalt_einheit": "kg"
+    },
+    "CIABATTA": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "WELTM.CHIABROET.": {
+        "inhalt_menge": 40.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO NO MILK": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO JOGH. HIMB.": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "LAUGENSTANGEN": {
+        "inhalt_menge": 700.0,
+        "inhalt_einheit": "g"
+    },
+    "GURKE BIO": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO BERGKAESE": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO MAASDAMER": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "PIZZATEIG M.SA.": {
+        "inhalt_menge": 600.0,
+        "inhalt_einheit": "g"
+    },
+    "KARTOFFELN DICK": {
+        "inhalt_menge": 2.5,
+        "inhalt_einheit": "kg"
+    },
+    "BASILIKUM": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "SCHLEMMERF. ITAL": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "SCHLEMMERFILET": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "PRESSEERZEUGNIS": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BIO FRISCHKAESE": {
+        "inhalt_menge": 175.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO HEFEWUERFEL": {
+        "inhalt_menge": 42.0,
+        "inhalt_einheit": "g"
+    },
+    "SMOOTHIE REWE": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "SMOOTHIE APFEL": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "TOMATENKETCHUP": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "ml"
+    },
+    "MILCHBROETCHEN": {
+        "inhalt_menge": 480.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO DIN.EIWAFFEL": {
+        "inhalt_menge": 165.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO H-MILCH 3,8%": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO JOGH.GRI.ART": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "LINGUINE HW NL": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO KINDERPASTA": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "FRITT HIMBEER": {
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "WILDBERRRY": {
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "STRAWBERRY": {
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "WASSEREIS HITSCH": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "ml"
+    },
+    "HARIBO WINE GUMS": {
+        "inhalt_menge": 175.0,
+        "inhalt_einheit": "g"
+    },
+    "NIVEA TAGESCREME": {
+        "inhalt_menge": 50.0,
+        "inhalt_einheit": "ml"
+    },
+    "ECOLOG. TOIPA": {
+        "inhalt_menge": 8.0,
+        "inhalt_einheit": "Stück"
+    },
+    "SCHMUTZRADIERER": {
+        "inhalt_menge": 4.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Avocado 2Stück": {
+        "inhalt_menge": 2.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Kiwi": {
+        "inhalt_menge": 4.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Paprika Mix": {
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bioland Wetterapfel": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Zwiebel rot 500g": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Mini Möhren 200g": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Basilikum im Topf": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Topf"
+    },
+    "Bio Gurken": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Petersilie kraus": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Schnittlauch": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Dill": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Packung"
+    },
+    "Paprika rot": {
+        "inhalt_menge": 3.0,
+        "inhalt_einheit": "Stück"
+    },
+    "BMI Bioland Natur": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Butter mildge.": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland H-Milch 3,8%": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "Brötchen Stein": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bauernbrötchen": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Brötchen Körner": {
+        "inhalt_menge": 95.0,
+        "inhalt_einheit": "g"
+    },
+    "Knotenbeutel0&G": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Birnen rot lose": {
+        "inhalt_menge": 0.738,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Strauchtomaten": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Emmentaler": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Hirtenkäse": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Gouda": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Mand.Van.": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol.Jogh.Himb.Holun": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Speisequark 8%": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Schoko": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Joghurt Haselnuß": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Eier Niedersach.": {
+        "inhalt_menge": 6.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Salami Classic": {
+        "inhalt_menge": 125.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Räucherlachs": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Mozzarella": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Rinderbrühe Glas": {
+        "inhalt_menge": 140.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Mini Romatomaten": {
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Speisek": {
+        "inhalt_menge": 1.5,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Feldsalat": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Orangen": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Möhren": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Birnen 500g": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "MSC Fischstäbchen": {
+        "inhalt_menge": 450.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfil. Tom-Mozz": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfilet Senf": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Knusperfilet Käse": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Emmen.ger.": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Mozzar. ger.": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Gut Erk. Mettenden": {
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Naturjogh 3,8%": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Blattsalat-Rohk. -Mix": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Hirtenkäsew. Kräuter": {
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Dinkel Fusili": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Cafe del Mundo": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Kaffee Espresso": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Konfitüre Himb.": {
+        "inhalt_menge": 260.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland Haferflocken": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Leinsamen geschr": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Kokosnussöl nat.": {
+        "inhalt_menge": 450.0,
+        "inhalt_einheit": "ml"
+    },
+    "Bio Sonnenmais": {
+        "inhalt_menge": 425.0,
+        "inhalt_einheit": "ml"
+    },
+    "Brot Vollk. Kör": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Vegane Karamellkekse": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Fritt Grapefruit": {
+        "inhalt_menge": 7.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Bio Rindergulasch": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Banane Fair Bio": {
+        "inhalt_menge": 0.912,
+        "inhalt_einheit": "kg"
+    },
+    "Mandarinen mit Blatt": {
+        "inhalt_menge": 750.0,
+        "inhalt_einheit": "g"
+    },
+    "Biol. Apfel rot 600g": {
+        "inhalt_menge": 600.0,
+        "inhalt_einheit": "g"
+    },
+    "Edamame Spaghett": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Bandnudeln 2 Ei": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Passierte Tomat.": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Bic Sonnenmais": {
+        "inhalt_menge": 425.0,
+        "inhalt_einheit": "ml"
+    },
+    "Coca Cola": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "l"
+    },
+    "Snackmandeln XXL": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Fruchtgumi Magica": {
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Apfeltasche Veg": {
+        "inhalt_menge": 105.0,
+        "inhalt_einheit": "g"
+    },
+    "Brötchen Schoko": {
+        "inhalt_menge": 70.0,
+        "inhalt_einheit": "g"
+    },
+    "Laugen Eck": {
+        "inhalt_menge": 90.0,
+        "inhalt_einheit": "g"
+    },
+    "Brötchen Weizen": {
+        "inhalt_menge": 60.0,
+        "inhalt_einheit": "g"
+    },
+    "Red Band Lakritz Duo": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "FruchtgummiBunterMix": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "kg"
+    },
+    "Bio Rinderhackfleisc": {
+        "inhalt_menge": 800.0,
+        "inhalt_einheit": "g"
+    },
+    "DIY Display-0528478": {
+        "inhalt_menge": 1.0,
+        "inhalt_einheit": "Stück"
+    },
+    "Erdnusskerne Fajita": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Erdnusskerne Pikant": {
+        "inhalt_menge": 150.0,
+        "inhalt_einheit": "g"
+    },
+    "Cash-Erd": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Snack -Mandeln": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Haselnüsse gerö": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Cruspies XXL BBQ": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "DILEK Mais geröstet": {
+        "inhalt_menge": 125.0,
+        "inhalt_einheit": "g"
+    },
+    "Nuts Royal XXL": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "Vollk. Butterkeks": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Haribo Phantasia": {
+        "inhalt_menge": 360.0,
+        "inhalt_einheit": "g"
+    },
+    "Bioland HaferZartbit": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Espresso Macchiato": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "ml"
+    },
+    "Salat Hähnchen": {
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Stremellachs": {
+        "inhalt_menge": 100.0,
+        "inhalt_einheit": "g"
+    },
+    "Sch.Zw.Mettw. Fettr.": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Mini Schinkenmettw.": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "Gelderl. Bauchspeck": {
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    },
+    "Salat Ceasar": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "SalatThunfisch": {
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "Geflügelfleischwurst": {
+        "inhalt_menge": 400.0,
+        "inhalt_einheit": "g"
+    },
+    "Bio Champignons": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO CAPPELLETT.S": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "TORT. TOM-MOZ": {
+        "inhalt_menge": 250.0,
+        "inhalt_einheit": "g"
+    },
+    "BLUMENERDE TOFFR": {
+        "inhalt_menge": 20.0,
+        "inhalt_einheit": "l"
+    },
+    "BIO TOMATENS.RIC": {
+        "inhalt_menge": 350.0,
+        "inhalt_einheit": "g"
+    },
+    "VEGGIE-FLEISCHWU": {
+        "inhalt_menge": 200.0,
+        "inhalt_einheit": "g"
+    },
+    "BIO JOGHURT 3,8%": {
+        "inhalt_menge": 500.0,
+        "inhalt_einheit": "g"
+    },
+    "REWE SOMMER-MIX": {
+        "inhalt_menge": 300.0,
+        "inhalt_einheit": "g"
+    }
+}
