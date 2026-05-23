@@ -325,46 +325,7 @@ def text_normalisieren(text):
     return text
 
 
-def vergleichspreis_berechnen(artikel):
-    preis = artikel['einzelpreis']
-    menge = artikel['inhalt_menge']
-    einheit = artikel['inhalt_einheit']
-    vergleichspreis = 0
-    vergleichsmenge = 'unbekannt'
 
-    if einheit == 'g':
-        vergleichspreis = float(preis/menge*1000)
-        vergleichsmenge = 'kg'
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    elif einheit == 'ml':
-        vergleichspreis = float(preis/menge*1000)
-        vergleichsmenge = 'l'
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    elif einheit == 'kg':
-        vergleichspreis = float(preis/menge)
-        vergleichsmenge = einheit
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    elif einheit == 'l':
-        vergleichspreis = float(preis/menge)
-        vergleichsmenge = einheit
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    elif einheit == 'Stück':
-        vergleichspreis = float(preis/menge)
-        vergleichsmenge = einheit
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    elif einheit == 'Flasche':
-        vergleichspreis = float(preis/menge)
-        vergleichsmenge = einheit
-        print(f'Der Vergleichspreis beträgt {vergleichspreis:.2f} €/{vergleichsmenge}.')
-        return vergleichspreis, vergleichsmenge
-    else:
-        print("Verpackungseinheit nicht hinterlegt, Vergleichspreis kann nicht berechnet werden.")
-        return None, None
 
 
 def pdf_text_auslesen(dateiname):
@@ -1519,41 +1480,118 @@ def einkaufsstatistik(einkaeufe):
         print("-" * 50)
 
 
-def kategorie_uebersicht(einkaeufe):
+def produkt_historie_anzeigen(einkaeufe):
+    historie_liste = []
+    eingabe = eingabe_mit_abbruch('Produkt für Historie eingeben: ')
+    if eingabe is None:
+        return None
+    for artikel in einkaeufe:
+        if eingabe.strip().lower() in artikel['produkt_standard'].lower(): 
+            #print(artikel['produkt_standard'])
+            historie_liste.append(artikel)
+    historie_liste.sort(key=lambda artikel: artikel['datum'])
+    if not historie_liste:
+        print('Keine passenden Artikel gefunden.')
+        return None
+    
+    print(f"\n Produkthistorie für {eingabe}\n"
+          f"Datum | Händler | Standardname | Zahlpreis | Stückpreis | Vergleichspreis\n")
+
+    for artikel in historie_liste:
+        zahlpreis = zahlpreis_berechnen(artikel)
+        stueckpreis = stueckpreis_berechnen(artikel)
+        vergleichspreis, vergleichsmenge = vergleichspreis_berechnen(artikel)
+
+
+        print(
+            f"{artikel['datum']} | "
+            f"{artikel['haendler']} | "
+            f"{artikel['produkt_standard']} | "
+            f"{zahlpreis:.2f} € | "
+            f"{stueckpreis:.2f} € | "
+            f"{vergleichspreis:.2f} €/{vergleichsmenge}")
+
+    return historie_liste
+
+
+def zahlpreis_berechnen(artikel):
+    return artikel["einzelpreis"] - artikel.get("rabatt", 0)
+
+
+def stueckpreis_berechnen(artikel):
+    return zahlpreis_berechnen(artikel) / artikel.get("menge", 1)
+
+
+def vergleichspreis_berechnen(artikel):
+    preis = zahlpreis_berechnen(artikel)/artikel['menge']
+    menge = artikel['inhalt_menge']
+    einheit = artikel['inhalt_einheit']
+    vergleichspreis = 0
+    vergleichsmenge = 'unbekannt'
+
+    if einheit == 'g':
+        vergleichspreis = float(preis/menge*1000)
+        vergleichsmenge = 'kg'
+        return vergleichspreis, vergleichsmenge
+    elif einheit == 'ml':
+        vergleichspreis = float(preis/menge*1000)
+        vergleichsmenge = 'l'
+        return vergleichspreis, vergleichsmenge
+    elif einheit == 'kg':
+        vergleichspreis = float(preis/menge)
+        vergleichsmenge = einheit
+        return vergleichspreis, vergleichsmenge
+    elif einheit == 'l':
+        vergleichspreis = float(preis/menge)
+        vergleichsmenge = einheit
+        return vergleichspreis, vergleichsmenge
+    elif einheit == 'Stück':
+        vergleichspreis = float(preis/menge)
+        vergleichsmenge = einheit
+        return vergleichspreis, vergleichsmenge
+    elif einheit == 'Flasche':
+        vergleichspreis = float(preis/menge)
+        vergleichsmenge = einheit
+        return vergleichspreis, vergleichsmenge
+    else:
+        print("Verpackungseinheit nicht hinterlegt, Vergleichspreis kann nicht berechnet werden.")
+        return None, None
+
+
+def kosten_nach_feld_sammeln(einkaeufe, feldname):
     if not einkaeufe:
         print('Keine Einkäufe vorhanden.')
         return
-    kategorie_daten = {}
+    daten = {}
     for artikel in einkaeufe:
         if artikel['vollstaendig']:
-            kategorie = artikel['kategorie']
-            kosten = artikel['einzelpreis']
-            if kategorie in kategorie_daten:
-                kategorie_daten[kategorie] += kosten
+            gruppe = artikel[feldname]
+            kosten = zahlpreis_berechnen(artikel)
+            if gruppe in daten:
+                daten[gruppe] += kosten
             else:
-                kategorie_daten[kategorie] = kosten
-    gesamt = sum(kategorie_daten.values())
-    for kategorie, kosten in sorted(kategorie_daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
-        anteil = kosten/gesamt*100
-        print(f"{kategorie} | {kosten:.2f} € | {anteil:.2f} %")
-        print("-" * 40)
+                daten[gruppe] = kosten
+    return daten
 
+def gruppen_uebersicht(einkaeufe, feldname, titel):
+    auswahl = {
+    '1': ('kategorie', 'Kategorieübersicht'),
+    '2': ('haendler', 'Händlerübersicht'),
+    '3': ('monat', 'Monatsübersicht'),
+    '4': ('kalenderwoche', 'Wochenübersicht')}
+    feldname, titel = auswahl
+    daten = kosten_nach_feld_sammeln(einkaeufe, 'kategorie')
+    gesamt = sum(daten.values())
+    for gruppe, kosten in sorted(daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
+        anteil = kosten/gesamt*100
+        print(f"{gruppe} | {kosten:.2f} € | {anteil:.2f} %")
+        print("-" * 40)
+    
         
 def haendler_uebersicht(einkaeufe):
-    if not einkaeufe:
-        print('Keine Einkäufe vorhanden.')
-        return
-    haendler_daten = {}
-    for artikel in einkaeufe:
-        if artikel['vollstaendig']:
-            haendler = artikel['haendler']
-            kosten = artikel['einzelpreis']
-            if haendler in haendler_daten:
-                haendler_daten[haendler] += kosten
-            else:
-                haendler_daten[haendler] = kosten
-    gesamt = sum(haendler_daten.values())
-    for haendler, kosten in sorted(haendler_daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
+    daten = kosten_nach_feld_sammeln(einkaeufe, 'kategorie')
+    gesamt = sum(daten.values())
+    for haendler, kosten in sorted(daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
         anteil = kosten/gesamt*100
         print(f"{haendler} | {kosten:.2f} €  | {anteil:.2f} %")
         print("-" * 40)
@@ -1922,7 +1960,7 @@ if __name__ == "__main__":
         elif wahl == '3':
             app_daten = menue_auswertungen(app_daten)
         elif wahl == '4':
-            print("Gerade gibt es nichts zu testen.")
+            historie_liste = produkt_historie_anzeigen(einkaeufe)
         elif wahl == '9':
             daten_speichern(dateien["einkaeufe"], app_daten["einkaeufe"])
             print('Programm beendet.')
