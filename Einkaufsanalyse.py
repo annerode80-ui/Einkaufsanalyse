@@ -1515,15 +1515,20 @@ def produkt_historie_anzeigen(einkaeufe):
 
 
 def zahlpreis_berechnen(artikel):
-    return artikel["einzelpreis"] - artikel.get("rabatt", 0)
+    preis = artikel.get('einzelpreis', 0)
+    rabatt = artikel.get('rabatt', 0)
+    return round(preis - rabatt, 2)
 
 
 def stueckpreis_berechnen(artikel):
-    return zahlpreis_berechnen(artikel) / artikel.get("menge", 1)
+    menge = artikel.get('menge', 1)
+    if menge in [None, 0]:
+        return None
+    return round(zahlpreis_berechnen(artikel) / menge, 2)
 
 
 def vergleichspreis_berechnen(artikel):
-    preis = zahlpreis_berechnen(artikel)/artikel['menge']
+    preis = zahlpreis_berechnen(artikel)
     menge = artikel['inhalt_menge']
     einheit = artikel['inhalt_einheit']
     vergleichspreis = 0
@@ -1574,72 +1579,11 @@ def kosten_nach_feld_sammeln(einkaeufe, feldname):
     return daten
 
 def gruppen_uebersicht(einkaeufe, feldname, titel):
-    auswahl = {
-    '1': ('kategorie', 'Kategorieübersicht'),
-    '2': ('haendler', 'Händlerübersicht'),
-    '3': ('monat', 'Monatsübersicht'),
-    '4': ('kalenderwoche', 'Wochenübersicht')}
-    feldname, titel = auswahl
-    daten = kosten_nach_feld_sammeln(einkaeufe, 'kategorie')
+    daten = kosten_nach_feld_sammeln(einkaeufe, feldname)
     gesamt = sum(daten.values())
     for gruppe, kosten in sorted(daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
         anteil = kosten/gesamt*100
         print(f"{gruppe} | {kosten:.2f} € | {anteil:.2f} %")
-        print("-" * 40)
-    
-        
-def haendler_uebersicht(einkaeufe):
-    daten = kosten_nach_feld_sammeln(einkaeufe, 'kategorie')
-    gesamt = sum(daten.values())
-    for haendler, kosten in sorted(daten.items(), key=lambda eintrag: eintrag[1], reverse=True):
-        anteil = kosten/gesamt*100
-        print(f"{haendler} | {kosten:.2f} €  | {anteil:.2f} %")
-        print("-" * 40)
-
-
-def monat_uebersicht(einkaeufe):
-    if not einkaeufe:
-        print('Keine Einkäufe vorhanden.')
-        return
-    monat_daten = {}
-    for artikel in einkaeufe:
-        if artikel['vollstaendig']:
-            monat = artikel['monat']
-            kosten = artikel['einzelpreis']
-            if monat in monat_daten:
-                monat_daten[monat] += kosten
-            else:
-                monat_daten[monat] = kosten
-    if not monat_daten:
-        print("Keine vollständigen Einträge für die Monatsübersicht vorhanden.")
-        return
-    gesamt = sum(monat_daten.values())
-    for monat, kosten in sorted(monat_daten.items()):
-        anteil = kosten/gesamt*100
-        print(f"Monat {monat} | {kosten:.2f} € | {anteil:.2f} %")
-        print("-" * 40)
-
-
-def woche_uebersicht(einkaeufe):
-    if not einkaeufe:
-        print('Keine Einkäufe vorhanden.')
-        return
-    woche_daten = {}
-    for artikel in einkaeufe:
-        if artikel['vollstaendig']:
-            woche = artikel['kalenderwoche']
-            kosten = artikel['einzelpreis']
-            if woche in woche_daten:
-                woche_daten[woche] += kosten
-            else:
-                woche_daten[woche] = kosten
-    if not woche_daten:
-        print("Keine vollständigen Einträge für die Wochenübersicht vorhanden.")
-        return
-    gesamt = sum(woche_daten.values())
-    for woche, kosten in sorted(woche_daten.items()):
-        anteil = kosten/gesamt*100
-        print(f"Kalenderwoche {woche} | {kosten:.2f} € | {anteil:.2f} %")
         print("-" * 40)
         
         
@@ -1854,7 +1798,13 @@ def menue_bearbeiten(app_daten, stammdaten_context):
 def menue_auswertungen(app_daten):
     einkaeufe = app_daten['einkaeufe']
     produkt_stammdaten = app_daten['produkt_stammdaten']
-    
+
+    auswahl = {
+        '5': ('kategorie', 'Kategorieübersicht'),
+        '6': ('haendler', 'Händlerübersicht'),
+        '7': ('monat', 'Monatsübersicht'),
+        '8': ('kalenderwoche', 'Wochenübersicht')}
+
     while True:
         print('\n' + '=' * 50)
         print('Auswertungen')
@@ -1868,9 +1818,11 @@ def menue_auswertungen(app_daten):
         print('7 = Monatsübersicht')
         print('8 = Wochenübersicht')
         print('9 = zurück zum Hauptmenü')
-        
+
         wahl = input('Menü-Auswahl: ').strip()
-                
+        print(f"DEBUG wahl: {repr(wahl)}")
+        print(f"DEBUG wahl in auswahl: {wahl in auswahl}")
+ 
         if wahl == '1':
             alle_einkaeufe_anzeigen(einkaeufe)
         elif wahl == '2':
@@ -1879,14 +1831,10 @@ def menue_auswertungen(app_daten):
             einkaufsstatistik(einkaeufe)
         elif wahl == '4':
             produkt_uebersicht(produkt_stammdaten)
-        elif wahl == '5':
-            kategorie_uebersicht(einkaeufe)
-        elif wahl == '6':
-            haendler_uebersicht(einkaeufe)
-        elif wahl == '7':
-            monat_uebersicht(einkaeufe)
-        elif wahl == '8':
-            woche_uebersicht(einkaeufe)
+        elif wahl in auswahl:
+            feldname, titel = auswahl[wahl]
+            print(f" Es werden {feldname} und {titel} übergeben.")
+            gruppen_uebersicht(einkaeufe, feldname, titel)
         elif wahl == '9':
             app_daten['einkaeufe'] = einkaeufe
             app_daten['produkt_stammdaten'] = produkt_stammdaten
@@ -1952,7 +1900,7 @@ if __name__ == "__main__":
         print('9 = Programm beenden')
 
         wahl = input('Menü-Auswahl: ').strip()
-
+    
         if wahl == '1':
             app_daten = menue_erfassung(dateien, app_daten, stammdaten_context)
         elif wahl == '2':
